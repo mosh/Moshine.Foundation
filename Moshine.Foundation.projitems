@@ -11,5 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)WebProxy.pas" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions.pas" />
+    <Compile Include="$(MSBuildThisFileDirectory)ReachAbility.pas" />
   </ItemGroup>
 </Project>
