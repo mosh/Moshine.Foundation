@@ -9,29 +9,18 @@ type
   public
     property Url:String;
 
-    method initWithName(aName: NSExceptionName) reason(aReason: nullable NSString) userInfo(aUserInfo: nullable NSDictionary):InstanceType; override;
+    constructor withName(aName: NSExceptionName) reason(aReason: nullable NSString) userInfo(aUserInfo: nullable NSDictionary);
     begin
-      self := inherited initWithName(aName) reason(aReason) userInfo(aUserInfo);
-      if(assigned(self))then
-      begin
-        self.Url := '';
+      inherited constructor withName(aName) reason(aReason) userInfo(aUserInfo);
 
-      end;
-      exit self;
+      self.Url := ''
     end;
 
-
-
-    method initWithName(name: not nullable NSString) reason(reason:String) userInfo(info:NSDictionary) FromUrl(fromUrl:NSString) :id;
+    constructor withName(aName: NSExceptionName) reason(aReason: nullable NSString) userInfo(aUserInfo: nullable NSDictionary) FromUrl(aUrl:NSString);
     begin
-      self := inherited initWithName(name) reason(reason) userInfo(info);
-      if(assigned(self))then
-      begin
-        self.Url := fromUrl;
-      end;
+      inherited constructor withName(aName) reason(aReason) userInfo(aUserInfo);
 
-      exit self;
-
+      self.Url := aUrl;
     end;
 
   end;
@@ -40,15 +29,12 @@ type
   public
     property StatusCode:Integer;
 
-    method initWithName(name: not nullable NSString) reason(reason:NSString) userInfo(info:NSDictionary) StatusCode(code:Integer) FromUrl(fromUrl:NSString) :id;
+    constructor withName(aName: NSExceptionName) reason(aReason: nullable NSString) userInfo(aUserInfo: nullable NSDictionary) StatusCode(aCode:Integer) FromUrl(aUrl:NSString);
     begin
-      self := inherited initWithName(name) reason(reason) userInfo(info);
-      if(assigned(self))then
-      begin
-        self.StatusCode := code;
-        self.Url := fromUrl;
-      end;
-      exit self;
+      inherited constructor withName(aName) reason(aReason) userInfo(aUserInfo);
+
+      self.Url := aUrl;
+      self.StatusCode := aCode;
     end;
 
   end;
