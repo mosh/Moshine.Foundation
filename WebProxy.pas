@@ -139,7 +139,7 @@ type
           if(statusCode = 401)then
           begin
             NSLog('%@','raising AuthenticationRequiredException from 401 statusCode');
-            raise new AuthenticationRequiredException withName('AuthenticationRequired') reason('authentication required from 401 statusCod') userInfo(nil) FromUrl(url);
+            raise new AuthenticationRequiredException withName('AuthenticationRequired') reason('authentication required from 401 statusCode') userInfo(nil) FromUrl(url);
           end
           else
           begin
