@@ -150,7 +150,7 @@ type
 
       if(assigned(taskError))then
       begin
-        NSLog('dataTaskWithRequest returned error');
+        NSLog('dataTashRequest returned error');
 
         if(taskError.code = NSURLErrorUserCancelledAuthentication)then
         begin
