@@ -9,7 +9,7 @@ type
   public
     property Url:String;
 
-    method initWithName(aName: NSExceptionName) reason(aReason: nullable NSString) userInfo(aUserInfo: nullable NSDictionary):instancetype; override;
+    method initWithName(aName: NSExceptionName) reason(aReason: nullable NSString) userInfo(aUserInfo: nullable NSDictionary):InstanceType; override;
     begin
       self := inherited initWithName(aName) reason(aReason) userInfo(aUserInfo);
       if(assigned(self))then
