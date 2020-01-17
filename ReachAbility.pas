@@ -1,11 +1,14 @@
 ﻿namespace Moshine.Foundation;
 
+{$IF TOFFEE}
+
 uses
   Foundation,
   {$IF IOS}
   SystemConfiguration
   {$ENDIF}
   ;
+{$ENDIF}
 
 type
 

@@ -1,38 +1,47 @@
 ﻿namespace Moshine.Foundation.Web;
 
 uses
+  {$IF TOFFEE}
   Foundation,
+  {$ENDIF}
   Moshine.Foundation,
   RemObjects.Elements.RTL;
 
 type
 
+  {$IF TOFFEE}
   RequestBuilderDelegate = public block(url:String;webMethod:String;addAuthentication:Boolean):NSMutableURLRequest;
+  {$ENDIF}
 
 
   WebProxy = public class
 
   protected
 
+    {$IF TOFFEE}
     _requestBuilder:RequestBuilderDelegate;
+    {$ENDIF}
 
-
-    method WebRequest<T>(webMethod:NSString; url:NSString;addAuthentication:Boolean := true):T;
+    method WebRequest<T>(webMethod:String; url:String;addAuthentication:Boolean := true):T;
     begin
       exit WebRequest(webMethod,url,addAuthentication) as T;
     end;
 
-    method WebRequest(webMethod:NSString; url:NSString;addAuthentication:Boolean := true):NSObject;
+    method WebRequest(webMethod:String; url:String;addAuthentication:Boolean := true):Object;
     begin
       exit WebRequest(webMethod, url, nil,addAuthentication);
     end;
 
-    method WebRequest<T>(webMethod:NSString; url:NSString; jsonBody:NSData;addAuthentication:Boolean := true):T;
+    {$IF TOFFEE}
+    method WebRequest<T>(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):T;
     begin
       exit WebRequest(webMethod, url, jsonBody, addAuthentication) as T;
     end;
+    {$ENDIF}
 
-    method WebRequest(webMethod:NSString; url:NSString; jsonBody:NSData;addAuthentication:Boolean := true):NSObject;
+
+    {$IF TOFFEE}
+    method WebRequest(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):Object;
     begin
 
       NSLog('WebRequest Method %@ Url %@',webMethod,url);
@@ -163,7 +172,15 @@ type
 
       exit blockData;
 
+
     end;
+    {$ELSE}
+    method WebRequest(webMethod:String; url:String; jsonBody:Object;addAuthentication:Boolean := true):Object;
+    begin
+
+    end;
+
+    {$ENDIF}
 
   end;
 
