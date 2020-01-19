@@ -3,6 +3,9 @@
 uses
   {$IF TOFFEE}
   Foundation,
+  {$ELSE}
+  Newtonsoft.Json,
+  System.Net.Http,
   {$ENDIF}
   Moshine.Foundation,
   RemObjects.Elements.RTL;
@@ -39,7 +42,6 @@ type
     end;
     {$ENDIF}
 
-
     {$IF TOFFEE}
     method WebRequest(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):Object;
     begin
@@ -62,12 +64,9 @@ type
       if(assigned(jsonBody))then
       begin
 
-        var dataLength := jsonBody.length();
-        var length := NSString.stringWithFormat('%ld', dataLength);
-
         request.setValue('application/json; charset=utf-8') forHTTPHeaderField('Content-Type');
         request.setValue('application/json') forHTTPHeaderField('Accept');
-        request.setValue( length ) forHTTPHeaderField('Content-Length');
+        request.setValue( $'{jsonBody.length}' ) forHTTPHeaderField('Content-Length');
 
         request.setHTTPBody(jsonBody);
 
@@ -175,9 +174,43 @@ type
 
     end;
     {$ELSE}
+
+    method MethodToHttpMethod(webMethod:String):HttpMethod;
+    begin
+      exit case webMethod of
+        'GET': HttpMethod.Get;
+        'PUT': HttpMethod.Put;
+        'POST': HttpMethod.Post;
+        'DELETE': HttpMethod.Delete;
+        else
+          raise new ArgumentException($'Invalid method {webMethod}');
+      end;
+    end;
+
     method WebRequest(webMethod:String; url:String; jsonBody:Object;addAuthentication:Boolean := true):Object;
     begin
+      var client := new HttpClient;
 
+      var requestMessage := new HttpRequestMessage(MethodToHttpMethod(webMethod), url);
+
+      if(assigned(jsonBody))then
+      begin
+        var someJson := JsonConvert.SerializeObject(jsonBody);
+        var content := new StringContent(someJson, Encoding.UTF8, 'application/json');
+        requestMessage.Content := content;
+      end;
+
+      var response := client.SendAsync(requestMessage).Result;
+
+      if(response.IsSuccessStatusCode)then
+      begin
+        var stringResponse := response.Content.ReadAsStringAsync.Result;
+        exit JsonConvert.DeserializeObject<Dictionary<String,Object>>(stringResponse);
+      end;
+
+      var exception := new HttpStatusCodeException();
+      exception.StatusCode := Integer(response.StatusCode);
+      raise exception;
     end;
 
     {$ENDIF}
