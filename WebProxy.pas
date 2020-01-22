@@ -19,34 +19,49 @@ type
 
   WebProxy = public class
 
+
+  private
+
+    {$IF TOFFEE}
+    method setJsonBody(jsonBody:NSData) OfRequest(request:NSMutableURLRequest);
+    begin
+      request.setValue('application/json; charset=utf-8') forHTTPHeaderField('Content-Type');
+      request.setValue('application/json') forHTTPHeaderField('Accept');
+      request.setValue( $'{jsonBody.length}' ) forHTTPHeaderField('Content-Length');
+      request.setHTTPBody(jsonBody);
+    end;
+    {$ENDIF}
+
   protected
 
     {$IF TOFFEE}
     _requestBuilder:RequestBuilderDelegate;
     {$ENDIF}
 
-    method WebRequest<T>(webMethod:String; url:String;addAuthentication:Boolean := true):T;
+    method WebRequestAsType<T>(webMethod:String; url:String;addAuthentication:Boolean := true):T;
     begin
-      exit WebRequest(webMethod,url,addAuthentication) as T;
+      exit WebRequestAsObject(webMethod,url,addAuthentication) as T;
     end;
 
-    method WebRequest(webMethod:String; url:String;addAuthentication:Boolean := true):Object;
+    method WebRequestAsObject(webMethod:String; url:String;addAuthentication:Boolean := true):Object;
     begin
-      exit WebRequest(webMethod, url, nil,addAuthentication);
+      exit WebRequestAsObject(webMethod, url, nil,addAuthentication);
     end;
 
     {$IF TOFFEE}
-    method WebRequest<T>(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):T;
+    method WebRequestAsType<T>(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):T;
     begin
-      exit WebRequest(webMethod, url, jsonBody, addAuthentication) as T;
+      exit WebRequestAsType<T>(webMethod, url, jsonBody, addAuthentication);
     end;
     {$ENDIF}
 
     {$IF TOFFEE}
-    method WebRequest(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):Object;
-    begin
 
+    method WebRequestAsString(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):String;
+    begin
       NSLog('WebRequest Method %@ Url %@',webMethod,url);
+
+      var stringResponse:String := nil;
 
       var request:NSMutableURLRequest;
 
@@ -63,13 +78,7 @@ type
 
       if(assigned(jsonBody))then
       begin
-
-        request.setValue('application/json; charset=utf-8') forHTTPHeaderField('Content-Type');
-        request.setValue('application/json') forHTTPHeaderField('Accept');
-        request.setValue( $'{jsonBody.length}' ) forHTTPHeaderField('Content-Length');
-
-        request.setHTTPBody(jsonBody);
-
+        setJsonBody(jsonBody) OfRequest(request);
       end;
 
       var taskError:NSError;
@@ -106,17 +115,7 @@ type
 
             if(String.IsNullOrEmpty(reason))then
             begin
-
-              var jsonError:NSError;
-
-              blockData := NSJSONSerialization.JSONObjectWithData(data) options(NSJSONReadingOptions.NSJSONReadingMutableContainers ) error( var jsonError );
-
-              if(assigned(jsonError))then
-              begin
-                blockData := nil;
-                taskError := jsonError;
-                reason := 'error from JSONObjectWithData';
-              end;
+              stringResponse := new NSString withData(data) encoding(NSStringEncoding.NSUTF8StringEncoding);
             end;
           end
           else
@@ -156,21 +155,34 @@ type
         end;
       end;
 
-      if(assigned(taskError))then
-      begin
-        NSLog('dataTashRequest returned error');
+      exit stringResponse;
 
-        if(taskError.code = NSURLErrorUserCancelledAuthentication)then
+    end;
+
+
+    method WebRequestAsObject(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):Object;
+    begin
+
+
+      var stringResponse := WebRequestAsString(webMethod, url, jsonBody, addAuthentication);
+
+      if (not string.IsNullOrEmpty(stringResponse)) then
+      begin
+        var data := NSString(stringResponse).dataUsingEncoding(NSStringEncoding.NSUTF8StringEncoding);
+        var jsonError:NSError;
+
+        var blockData := NSJSONSerialization.JSONObjectWithData(data) options(NSJSONReadingOptions.NSJSONReadingMutableContainers ) error( var jsonError );
+
+        if(assigned(jsonError))then
         begin
-          NSLog('%@','raising AuthenticationRequiredException');
-          raise new AuthenticationRequiredException withName('AuthenticationRequired') reason('authentication required') userInfo(nil) FromUrl(url);
+          var reason := 'error from JSONObjectWithData';
+          raise new ProxyException withName('ProxyException') reason(reason) userInfo(nil) FromUrl(url);
         end;
-        NSLog('%@','raising ProxyException');
-        raise new ProxyException withName('ProxyException') reason('error from request') userInfo(nil) FromUrl(url);
+
+        exit blockData;
       end;
 
-      exit blockData;
-
+      exit nil;
 
     end;
     {$ELSE}
@@ -187,7 +199,7 @@ type
       end;
     end;
 
-    method WebRequest(webMethod:String; url:String; jsonBody:Object;addAuthentication:Boolean := true):Object;
+    method WebRequestAsString(webMethod:String; url:String; jsonBody:Object;addAuthentication:Boolean := true):String;
     begin
       var client := new HttpClient;
 
@@ -204,13 +216,18 @@ type
 
       if(response.IsSuccessStatusCode)then
       begin
-        var stringResponse := response.Content.ReadAsStringAsync.Result;
-        exit JsonConvert.DeserializeObject<Dictionary<String,Object>>(stringResponse);
+        exit response.Content.ReadAsStringAsync.Result;
       end;
 
       var exception := new HttpStatusCodeException();
       exception.StatusCode := Integer(response.StatusCode);
       raise exception;
+
+    end;
+
+    method WebRequestAsObject(webMethod:String; url:String; jsonBody:Object;addAuthentication:Boolean := true):Object;
+    begin
+      exit JsonConvert.DeserializeObject<Dictionary<String,Object>>(WebRequestAsString(webMethod, url, jsonBody, addAuthentication));
     end;
 
     {$ENDIF}
