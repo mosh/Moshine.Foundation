@@ -13,8 +13,15 @@ uses
 type
 
   {$IF TOFFEE}
-  RequestBuilderDelegate = public block(url:String;webMethod:String;addAuthentication:Boolean):NSMutableURLRequest;
+  PlatformHttpRequest = public NSMutableURLRequest;
+  {$ELSEIF ECHOES}
+  PlatformHttpRequest = public HttpRequestMessage;
   {$ENDIF}
+
+  HttpRequest = public class mapped to PlatformHttpRequest
+  end;
+
+  RequestBuilderDelegate = public block(url:String;webMethod:String;addAuthentication:Boolean):HttpRequest;
 
 
   WebProxy = public class
@@ -23,7 +30,7 @@ type
   private
 
     {$IF TOFFEE}
-    method setJsonBody(jsonBody:NSData) OfRequest(request:NSMutableURLRequest);
+    method setJsonBody(jsonBody:NSData) OfRequest(request:HttpRequest);
     begin
       request.setValue('application/json; charset=utf-8') forHTTPHeaderField('Content-Type');
       request.setValue('application/json') forHTTPHeaderField('Accept');
@@ -34,9 +41,7 @@ type
 
   protected
 
-    {$IF TOFFEE}
     _requestBuilder:RequestBuilderDelegate;
-    {$ENDIF}
 
     method WebRequestAsType<T>(webMethod:String; url:String;addAuthentication:Boolean := true):T;
     begin
@@ -63,7 +68,7 @@ type
 
       var stringResponse:String := nil;
 
-      var request:NSMutableURLRequest;
+      var request:HttpRequest;
 
       if(assigned(_requestBuilder))then
       begin
@@ -71,7 +76,7 @@ type
       end
       else
       begin
-        request := new NSMutableURLRequest() withURL( new NSURL() withString( url ));
+        request := new HttpRequest() withURL( new NSURL() withString( url ));
         request.setHTTPMethod(webMethod);
       end;
 
@@ -203,7 +208,16 @@ type
     begin
       var client := new HttpClient;
 
-      var requestMessage := new HttpRequestMessage(MethodToHttpMethod(webMethod), url);
+      var requestMessage:HttpRequestMessage;
+
+      if(not assigned(_requestBuilder))then
+      begin
+        requestMessage := new PlatformHttpRequest(MethodToHttpMethod(webMethod), url);
+      end
+      else
+      begin
+        requestMessage := _requestBuilder(url, webMethod,addAuthentication);
+      end;
 
       if(assigned(jsonBody))then
       begin
