@@ -12,32 +12,12 @@ uses
 
 type
 
-  {$IF TOFFEE}
-  PlatformHttpRequest = public NSMutableURLRequest;
-  {$ELSEIF ECHOES}
-  PlatformHttpRequest = public HttpRequestMessage;
-  {$ENDIF}
-
-  HttpRequest = public class mapped to PlatformHttpRequest
-  end;
 
   RequestBuilderDelegate = public block(url:String;webMethod:String;addAuthentication:Boolean):HttpRequest;
 
 
   WebProxy = public class
 
-
-  private
-
-    {$IF TOFFEE}
-    method setJsonBody(jsonBody:NSData) OfRequest(request:HttpRequest);
-    begin
-      request.setValue('application/json; charset=utf-8') forHTTPHeaderField('Content-Type');
-      request.setValue('application/json') forHTTPHeaderField('Accept');
-      request.setValue( $'{jsonBody.length}' ) forHTTPHeaderField('Content-Length');
-      request.setHTTPBody(jsonBody);
-    end;
-    {$ENDIF}
 
   protected
 
@@ -76,20 +56,19 @@ type
       end
       else
       begin
-        request := new HttpRequest() withURL( new NSURL() withString( url ));
-        request.setHTTPMethod(webMethod);
+        request := new HttpRequest(webMethod, url);
+        request.HttpMethod := webMethod;
       end;
 
 
       if(assigned(jsonBody))then
       begin
-        setJsonBody(jsonBody) OfRequest(request);
+        var stringForData := new NSString withData(jsonBody) encoding(NSStringEncoding.NSUTF8StringEncoding);
+        request.JsonBody := stringForData;
       end;
 
-      var taskError:NSError;
       var reason:NSString := nil;
       var statusCode:NSInteger := 0;
-      var blockData:NSObject := nil;
 
       var outerExecutionBlock: NSBlockOperation := NSBlockOperation.blockOperationWithBlock(method() begin
 
@@ -122,10 +101,6 @@ type
             begin
               stringResponse := new NSString withData(data) encoding(NSStringEncoding.NSUTF8StringEncoding);
             end;
-          end
-          else
-          begin
-            taskError := error;
           end;
 
           dispatch_semaphore_signal(semaphore);
@@ -192,17 +167,6 @@ type
     end;
     {$ELSE}
 
-    method MethodToHttpMethod(webMethod:String):HttpMethod;
-    begin
-      exit case webMethod of
-        'GET': HttpMethod.Get;
-        'PUT': HttpMethod.Put;
-        'POST': HttpMethod.Post;
-        'DELETE': HttpMethod.Delete;
-        else
-          raise new ArgumentException($'Invalid method {webMethod}');
-      end;
-    end;
 
     method WebRequestAsString(webMethod:String; url:String; jsonBody:Object;addAuthentication:Boolean := true):String;
     begin
@@ -212,7 +176,7 @@ type
 
       if(not assigned(_requestBuilder))then
       begin
-        requestMessage := new PlatformHttpRequest(MethodToHttpMethod(webMethod), url);
+        requestMessage := new Moshine.Foundation.Web.HttpRequest(webMethod, url);
       end
       else
       begin
