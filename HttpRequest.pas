@@ -54,6 +54,16 @@ type
 
     {$ENDIF}
 
+    method AddHeader(name:String; value:String);
+    begin
+      {$IF TOFFEE}
+      mapped.setValue(value) forHTTPHeaderField(name);
+      {$ELSEIF ECHOES}
+      mapped.Headers.Add(name,value);
+      {$ENDIF}
+
+    end;
+
 
     property HttpMethod:String write
       begin
@@ -63,7 +73,6 @@ type
 
         {$IFDEF ECHOES}
         {$ENDIF}
-
       end;
 
     property JsonBody : String write
