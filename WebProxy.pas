@@ -23,7 +23,7 @@ type
 
     _requestBuilder:RequestBuilderDelegate;
 
-    method WebRequestAsType<T>(webMethod:String; url:String;addAuthentication:Boolean := true):T;
+    method WebRequestAs<T>(webMethod:String; url:String;addAuthentication:Boolean := true):T;
     begin
       exit WebRequestAsObject(webMethod,url,addAuthentication) as T;
     end;
@@ -34,9 +34,9 @@ type
     end;
 
     {$IF TOFFEE}
-    method WebRequestAsType<T>(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):T;
+    method WebRequestAs<T>(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):T;
     begin
-      exit WebRequestAsType<T>(webMethod, url, jsonBody, addAuthentication);
+      exit WebRequestAs<T>(webMethod, url, jsonBody, addAuthentication);
     end;
     {$ENDIF}
 
