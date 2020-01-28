@@ -1,14 +1,27 @@
 ﻿namespace Moshine.Foundation;
 
+
+{$IF TOFFEE}
 uses
   Foundation;
+{$ELSE}
+{$ENDIF}
+
 
 type
 
-  ProxyException = public class (NSException)
+  {$IF TOFFEE}
+  PlatformException = public NSException;
+  {$ELSE}
+  PlatformException = public System.Exception;
+  {$ENDIF}
+
+
+  ProxyException = public class (PlatformException)
   public
     property Url:String;
 
+    {$IF TOFFEE}
     constructor withName(aName: NSExceptionName) reason(aReason: nullable NSString) userInfo(aUserInfo: nullable NSDictionary);
     begin
       inherited constructor withName(aName) reason(aReason) userInfo(aUserInfo);
@@ -22,6 +35,7 @@ type
 
       self.Url := aUrl;
     end;
+    {$ENDIF}
 
   end;
 
@@ -29,6 +43,8 @@ type
   public
     property StatusCode:Integer;
 
+
+    {$IF TOFFEE}
     constructor withName(aName: NSExceptionName) reason(aReason: nullable NSString) userInfo(aUserInfo: nullable NSDictionary) StatusCode(aCode:Integer) FromUrl(aUrl:NSString);
     begin
       inherited constructor withName(aName) reason(aReason) userInfo(aUserInfo);
@@ -36,6 +52,8 @@ type
       self.Url := aUrl;
       self.StatusCode := aCode;
     end;
+    {$ENDIF}
+
 
   end;
 

@@ -1,43 +1,54 @@
 ﻿namespace Moshine.Foundation.Web;
 
 uses
+  {$IF TOFFEE}
   Foundation,
+  {$ELSE}
+  Newtonsoft.Json,
+  System.Net.Http,
+  {$ENDIF}
   Moshine.Foundation,
   RemObjects.Elements.RTL;
 
 type
 
-  RequestBuilderDelegate = public block(url:String;webMethod:String;addAuthentication:Boolean):NSMutableURLRequest;
+
+  RequestBuilderDelegate = public block(url:String;webMethod:String;addAuthentication:Boolean):HttpRequest;
 
 
   WebProxy = public class
+
 
   protected
 
     _requestBuilder:RequestBuilderDelegate;
 
-
-    method WebRequest<T>(webMethod:NSString; url:NSString;addAuthentication:Boolean := true):T;
+    method WebRequestAs<T>(webMethod:String; url:String;addAuthentication:Boolean := true):T;
     begin
-      exit WebRequest(webMethod,url,addAuthentication) as T;
+      exit WebRequestAsObject(webMethod,url,addAuthentication) as T;
     end;
 
-    method WebRequest(webMethod:NSString; url:NSString;addAuthentication:Boolean := true):NSObject;
+    method WebRequestAsObject(webMethod:String; url:String;addAuthentication:Boolean := true):Object;
     begin
-      exit WebRequest(webMethod, url, nil,addAuthentication);
+      exit WebRequestAsObject(webMethod, url, nil,addAuthentication);
     end;
 
-    method WebRequest<T>(webMethod:NSString; url:NSString; jsonBody:NSData;addAuthentication:Boolean := true):T;
+    {$IF TOFFEE}
+    method WebRequestAs<T>(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):T;
     begin
-      exit WebRequest(webMethod, url, jsonBody, addAuthentication) as T;
+      exit WebRequestAs<T>(webMethod, url, jsonBody, addAuthentication);
     end;
+    {$ENDIF}
 
-    method WebRequest(webMethod:NSString; url:NSString; jsonBody:NSData;addAuthentication:Boolean := true):NSObject;
+    {$IF TOFFEE}
+
+    method WebRequestAsString(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):String;
     begin
-
       NSLog('WebRequest Method %@ Url %@',webMethod,url);
 
-      var request:NSMutableURLRequest;
+      var stringResponse:String := nil;
+
+      var request:HttpRequest;
 
       if(assigned(_requestBuilder))then
       begin
@@ -45,29 +56,19 @@ type
       end
       else
       begin
-        request := new NSMutableURLRequest() withURL( new NSURL() withString( url ));
-        request.setHTTPMethod(webMethod);
+        request := new HttpRequest(webMethod, url);
+        request.HttpMethod := webMethod;
       end;
 
 
       if(assigned(jsonBody))then
       begin
-
-        var dataLength := jsonBody.length();
-        var length := NSString.stringWithFormat('%ld', dataLength);
-
-        request.setValue('application/json; charset=utf-8') forHTTPHeaderField('Content-Type');
-        request.setValue('application/json') forHTTPHeaderField('Accept');
-        request.setValue( length ) forHTTPHeaderField('Content-Length');
-
-        request.setHTTPBody(jsonBody);
-
+        var stringForData := new NSString withData(jsonBody) encoding(NSStringEncoding.NSUTF8StringEncoding);
+        request.JsonBody := stringForData;
       end;
 
-      var taskError:NSError;
       var reason:NSString := nil;
       var statusCode:NSInteger := 0;
-      var blockData:NSObject := nil;
 
       var outerExecutionBlock: NSBlockOperation := NSBlockOperation.blockOperationWithBlock(method() begin
 
@@ -98,22 +99,8 @@ type
 
             if(String.IsNullOrEmpty(reason))then
             begin
-
-              var jsonError:NSError;
-
-              blockData := NSJSONSerialization.JSONObjectWithData(data) options(NSJSONReadingOptions.NSJSONReadingMutableContainers ) error( var jsonError );
-
-              if(assigned(jsonError))then
-              begin
-                blockData := nil;
-                taskError := jsonError;
-                reason := 'error from JSONObjectWithData';
-              end;
+              stringResponse := new NSString withData(data) encoding(NSStringEncoding.NSUTF8StringEncoding);
             end;
-          end
-          else
-          begin
-            taskError := error;
           end;
 
           dispatch_semaphore_signal(semaphore);
@@ -148,22 +135,80 @@ type
         end;
       end;
 
-      if(assigned(taskError))then
-      begin
-        NSLog('dataTashRequest returned error');
-
-        if(taskError.code = NSURLErrorUserCancelledAuthentication)then
-        begin
-          NSLog('%@','raising AuthenticationRequiredException');
-          raise new AuthenticationRequiredException withName('AuthenticationRequired') reason('authentication required') userInfo(nil) FromUrl(url);
-        end;
-        NSLog('%@','raising ProxyException');
-        raise new ProxyException withName('ProxyException') reason('error from request') userInfo(nil) FromUrl(url);
-      end;
-
-      exit blockData;
+      exit stringResponse;
 
     end;
+
+
+    method WebRequestAsObject(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):Object;
+    begin
+
+
+      var stringResponse := WebRequestAsString(webMethod, url, jsonBody, addAuthentication);
+
+      if (not string.IsNullOrEmpty(stringResponse)) then
+      begin
+        var data := NSString(stringResponse).dataUsingEncoding(NSStringEncoding.NSUTF8StringEncoding);
+        var jsonError:NSError;
+
+        var blockData := NSJSONSerialization.JSONObjectWithData(data) options(NSJSONReadingOptions.NSJSONReadingMutableContainers ) error( var jsonError );
+
+        if(assigned(jsonError))then
+        begin
+          var reason := 'error from JSONObjectWithData';
+          raise new ProxyException withName('ProxyException') reason(reason) userInfo(nil) FromUrl(url);
+        end;
+
+        exit blockData;
+      end;
+
+      exit nil;
+
+    end;
+    {$ELSE}
+
+
+    method WebRequestAsString(webMethod:String; url:String; jsonBody:Object;addAuthentication:Boolean := true):String;
+    begin
+      var client := new HttpClient;
+
+      var requestMessage:HttpRequestMessage;
+
+      if(not assigned(_requestBuilder))then
+      begin
+        requestMessage := new Moshine.Foundation.Web.HttpRequest(webMethod, url);
+      end
+      else
+      begin
+        requestMessage := _requestBuilder(url, webMethod,addAuthentication);
+      end;
+
+      if(assigned(jsonBody))then
+      begin
+        var someJson := JsonConvert.SerializeObject(jsonBody);
+        var content := new StringContent(someJson, Encoding.UTF8, 'application/json');
+        requestMessage.Content := content;
+      end;
+
+      var response := client.SendAsync(requestMessage).Result;
+
+      if(response.IsSuccessStatusCode)then
+      begin
+        exit response.Content.ReadAsStringAsync.Result;
+      end;
+
+      var exception := new HttpStatusCodeException();
+      exception.StatusCode := Integer(response.StatusCode);
+      raise exception;
+
+    end;
+
+    method WebRequestAsObject(webMethod:String; url:String; jsonBody:Object;addAuthentication:Boolean := true):Object;
+    begin
+      exit JsonConvert.DeserializeObject<Dictionary<String,Object>>(WebRequestAsString(webMethod, url, jsonBody, addAuthentication));
+    end;
+
+    {$ENDIF}
 
   end;
 
