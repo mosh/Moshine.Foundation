@@ -19,18 +19,25 @@ type
   const DefaultDateTimeFormat:String = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
   {$ENDIF}
 
+  {$IF TOFFEE}
+  class property StandardFormatter : NSISO8601DateFormatter read
+    begin
+      var options := NSISO8601DateFormatOptions.WithInternetDateTime or NSISO8601DateFormatOptions.WithDashSeparatorInDate or NSISO8601DateFormatOptions.WithColonSeparatorInTime or NSISO8601DateFormatOptions.WithColonSeparatorInTimeZone;
+      var formatter := new NSISO8601DateFormatter;
+      formatter.timeZone := NSTimeZone.localTimeZone;
+      formatter.formatOptions := options;
+      exit formatter;
+    end;
+  {$ENDIF}
+
   public
-
-
-
 
     class method ParseISO8601DateTime(value:String):RemObjects.Elements.RTL.DateTime;
     begin
       {$IFDEF ECHOES}
       raise new RemObjects.Elements.RTL.NotImplementedException;
       {$ELSEIF TOFFEE}
-      var formatter := new NSISO8601DateFormatter;
-      exit formatter.dateFromString(value);
+      exit StandardFormatter.dateFromString(value);
       {$ELSE}
       raise new RemObjects.Elements.RTL.NotImplementedException;
       {$ENDIF}
@@ -42,8 +49,7 @@ type
       {$IFDEF ECHOES}
       exit RemObjects.Elements.RTL.PlatformDateTime(value).ToString(DefaultDateTimeFormat, System.Globalization.CultureInfo.CurrentCulture);
       {$ELSEIF TOFFEE}
-      var formatter := new NSISO8601DateFormatter;
-      exit formatter.stringFromDate(value);
+      exit StandardFormatter.stringFromDate(value);
       {$ELSE}
       raise RemObjects.Elements.RTL.NotImplementedException;
       {$ENDIF}
