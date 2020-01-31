@@ -35,7 +35,7 @@ type
     class method ParseISO8601DateTime(value:String):RemObjects.Elements.RTL.DateTime;
     begin
       {$IFDEF ECHOES}
-      raise new RemObjects.Elements.RTL.NotImplementedException;
+      exit System.DateTime.ParseExact(value, DefaultDateTimeFormat,nil);
       {$ELSEIF TOFFEE}
       exit StandardFormatter.dateFromString(value);
       {$ELSE}
