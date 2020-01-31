@@ -13,6 +13,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions.pas" />
     <Compile Include="$(MSBuildThisFileDirectory)ReachAbility.pas" />
     <Compile Include="$(MSBuildThisFileDirectory)HttpRequest.pas" />
+    <Compile Include="$(MSBuildThisFileDirectory)NSDateExtensions.pas" />
     <Compile Include="$(MSBuildThisFileDirectory)DateTimeExtensions.pas" />
+    <Compile Include="$(MSBuildThisFileDirectory)IntegerExtensions.pas" />
+    <Compile Include="$(MSBuildThisFileDirectory)ISO8601FormatterProxy.pas" />
+    <Compile Include="$(MSBuildThisFileDirectory)ApplicationHelpers.pas" />
+    <Compile Include="$(MSBuildThisFileDirectory)DateUtils.pas" />
   </ItemGroup>
 </Project>
