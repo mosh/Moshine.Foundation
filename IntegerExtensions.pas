@@ -1,5 +1,7 @@
 ﻿namespace Moshine.Foundation;
 
+{$IF TOFFEE}
+
 uses
   Foundation, RemObjects.Elements.RTL;
 
@@ -55,5 +57,7 @@ type
     end;
 
   end;
+
+{$ENDIF}
 
 end.

@@ -1,5 +1,7 @@
 ﻿namespace Moshine.Foundation;
 
+{$IF TOFFEE}
+
 uses
   Foundation;
 
@@ -16,4 +18,5 @@ type
     end;
 
   end;
+{$ENDIF}
 end.

@@ -16,7 +16,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)NSDateExtensions.pas" />
     <Compile Include="$(MSBuildThisFileDirectory)DateTimeExtensions.pas" />
     <Compile Include="$(MSBuildThisFileDirectory)IntegerExtensions.pas" />
-    <Compile Include="$(MSBuildThisFileDirectory)ISO8601FormatterProxy.pas" />
     <Compile Include="$(MSBuildThisFileDirectory)ApplicationHelpers.pas" />
     <Compile Include="$(MSBuildThisFileDirectory)DateUtils.pas" />
   </ItemGroup>
