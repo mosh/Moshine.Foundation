@@ -53,7 +53,17 @@ type
       {$ELSE}
       raise RemObjects.Elements.RTL.NotImplementedException;
       {$ENDIF}
+    end;
 
+    class method Now:DateTime;
+    begin
+      {$IFDEF ECHOES}
+      exit PlatformDateTime.Now;
+      {$ELSEIF TOFFEE}
+      exit new PlatformDateTime;
+      {$ELSE}
+      raise RemObjects.Elements.RTL.NotImplementedException;
+      {$ENDIF}
 
     end;
 
