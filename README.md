@@ -1,2 +1,8 @@
 # Moshine.Foundation
-Cocoa specific api for iOS, WatchOS and MacOS. Partial support for .Net
+
+Extensions and api for iOS, WatchOS, MacOS and  .Net
+
+ReachAbility for cocoa
+Base class for writing Web API
+Extension classes for Dates 
+ISO8601 support for parsing to dates and back to String, using platform native api.
