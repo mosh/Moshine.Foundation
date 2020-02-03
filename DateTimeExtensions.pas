@@ -55,12 +55,12 @@ type
       {$ENDIF}
     end;
 
-    class method Now:DateTime;
+    class method Now:RemObjects.Elements.RTL.DateTime;
     begin
       {$IFDEF ECHOES}
-      exit PlatformDateTime.Now;
+      exit RemObjects.Elements.RTL.PlatformDateTime.Now;
       {$ELSEIF TOFFEE}
-      exit new PlatformDateTime;
+      exit new RemObjects.Elements.RTL.PlatformDateTime;
       {$ELSE}
       raise RemObjects.Elements.RTL.NotImplementedException;
       {$ENDIF}
