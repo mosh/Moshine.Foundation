@@ -25,7 +25,11 @@ type
 
     method WebRequestAs<T>(webMethod:String; url:String;addAuthentication:Boolean := true):T;
     begin
+      {$IFDEF TOFFEE}
       exit WebRequestAsObject(webMethod,url,addAuthentication) as T;
+      {$ELSE}
+      exit JsonConvert.DeserializeObject<T>(WebRequestAsString(webMethod, url, nil,addAuthentication));
+      {$ENDIF}
     end;
 
     method WebRequestAsObject(webMethod:String; url:String;addAuthentication:Boolean := true):Object;
@@ -36,7 +40,16 @@ type
     {$IF TOFFEE}
     method WebRequestAs<T>(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):T;
     begin
-      exit WebRequestAs<T>(webMethod, url, jsonBody, addAuthentication);
+      var obj := WebRequestAsObject(webMethod, url, jsonBody,addAuthentication);
+      if(not assigned(obj))then
+      begin
+        exit nil;
+      end;
+      if (not assigned(T(obj))) then
+      begin
+        raise new ProxyException withName('ProxyException') reason($'proxy response is not of the correct type ') userInfo(nil) FromUrl(url);
+      end;
+      exit obj as T;
     end;
     {$ENDIF}
 
@@ -76,43 +89,44 @@ type
 
         var session := NSURLSession.sharedSession; // or create your own session with your own NSURLSessionConfiguration
 
-        var task := session. dataTaskWithRequest(request) completionHandler(method (data:NSData; response:NSURLResponse; error:NSError)begin
-
-          if(not assigned(error))then
+        var task := session.dataTaskWithRequest(request) completionHandler(method (data:NSData; response:NSURLResponse; error:NSError)
           begin
-            NSLog('WebRequest Method %@ Url %@ returned Response',webMethod,url);
 
-            if(response is NSHTTPURLResponse)then
+            if(not assigned(error))then
             begin
-              var httpResponse := response as NSHTTPURLResponse;
+              NSLog('WebRequest Method %@ Url %@ returned Response',webMethod,url);
 
-              statusCode := httpResponse.statusCode;
-
-              NSLog('UrlResponse Method %@ Url %@ Response %ld',webMethod,url,statusCode);
-
-              if(statusCode <> 200)then
+              if(response is NSHTTPURLResponse)then
               begin
-                reason := NSString.stringWithFormat('Url  %@ returned Invalid Status Code %ld', url, statusCode);
+                var httpResponse := response as NSHTTPURLResponse;
+
+                statusCode := httpResponse.statusCode;
+
+                NSLog('UrlResponse Method %@ Url %@ Response %ld',webMethod,url,statusCode);
+
+                if(statusCode <> 200)then
+                begin
+                  reason := NSString.stringWithFormat('Url  %@ returned Invalid Status Code %ld', url, statusCode);
+                end;
+
               end;
 
+              if(String.IsNullOrEmpty(reason))then
+              begin
+                stringResponse := new NSString withData(data) encoding(NSStringEncoding.NSUTF8StringEncoding);
+              end;
             end;
 
-            if(String.IsNullOrEmpty(reason))then
-            begin
-              stringResponse := new NSString withData(data) encoding(NSStringEncoding.NSUTF8StringEncoding);
-            end;
-          end;
+            dispatch_semaphore_signal(semaphore);
+          end);
 
-          dispatch_semaphore_signal(semaphore);
+          task.resume;
+
+          dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+
         end);
 
-        task.resume;
-
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-
-      end);
-
-      var workerQueue := new NSOperationQueue();
+      var workerQueue := new NSOperationQueue;
       workerQueue.addOperations([outerExecutionBlock]) waitUntilFinished(true);
 
       if(not String.IsNullOrEmpty(reason))then
@@ -142,7 +156,6 @@ type
 
     method WebRequestAsObject(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):Object;
     begin
-
 
       var stringResponse := WebRequestAsString(webMethod, url, jsonBody, addAuthentication);
 
