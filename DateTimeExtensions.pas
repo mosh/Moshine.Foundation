@@ -20,21 +20,29 @@ type
   {$ENDIF}
 
   {$IF TOFFEE}
-  class property FormatterForParsing : NSISO8601DateFormatter read
+
+  class property FormatterForParsing1 : NSISO8601DateFormatter read
     begin
-      var options := NSISO8601DateFormatOptions.WithFractionalSeconds;
       var formatter := new NSISO8601DateFormatter;
       formatter.timeZone := NSTimeZone.localTimeZone;
-      formatter.formatOptions := options;
+      formatter.formatOptions := NSISO8601DateFormatOptions.WithInternetDateTime;
       exit formatter;
     end;
 
-  class property FormatterForToString : NSISO8601DateFormatter read
+  class property FormatterForParsing2 : NSISO8601DateFormatter read
     begin
-      var options := NSISO8601DateFormatOptions.WithInternetDateTime or NSISO8601DateFormatOptions.WithDashSeparatorInDate or NSISO8601DateFormatOptions.WithColonSeparatorInTime or NSISO8601DateFormatOptions.WithColonSeparatorInTimeZone ;
       var formatter := new NSISO8601DateFormatter;
       formatter.timeZone := NSTimeZone.localTimeZone;
-      formatter.formatOptions := options;
+      formatter.formatOptions := NSISO8601DateFormatOptions.WithInternetDateTime or NSISO8601DateFormatOptions.WithFractionalSeconds;
+      exit formatter;
+    end;
+
+
+  class property FormatterForToString : NSISO8601DateFormatter read
+    begin
+      var formatter := new NSISO8601DateFormatter;
+      formatter.timeZone := NSTimeZone.localTimeZone;
+      formatter.formatOptions := NSISO8601DateFormatOptions.WithInternetDateTime or NSISO8601DateFormatOptions.WithDashSeparatorInDate or NSISO8601DateFormatOptions.WithColonSeparatorInTime or NSISO8601DateFormatOptions.WithColonSeparatorInTimeZone;
       exit formatter;
     end;
 
@@ -47,7 +55,12 @@ type
       {$IFDEF ECHOES}
       exit System.DateTime.ParseExact(value, DefaultDateTimeFormat,nil);
       {$ELSEIF TOFFEE}
-      exit FormatterForParsing.dateFromString(value);
+      var outValue := FormatterForParsing1.dateFromString(value);
+      if(not assigned(outValue))then
+      begin
+        outValue := FormatterForParsing2.dateFromString(value);
+      end;
+      exit outValue;
       {$ELSE}
       raise new RemObjects.Elements.RTL.NotImplementedException;
       {$ENDIF}
