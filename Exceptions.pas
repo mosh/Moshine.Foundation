@@ -68,4 +68,8 @@ type
   NoNetworkConnectionException = public class(ProxyException)
   end;
 
+
+  ProxyFormatException = public class(ProxyException)
+  end;
+
 end.
