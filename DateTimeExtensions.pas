@@ -20,14 +20,24 @@ type
   {$ENDIF}
 
   {$IF TOFFEE}
-  class property StandardFormatter : NSISO8601DateFormatter read
+  class property FormatterForParsing : NSISO8601DateFormatter read
     begin
-      var options := NSISO8601DateFormatOptions.WithInternetDateTime or NSISO8601DateFormatOptions.WithDashSeparatorInDate or NSISO8601DateFormatOptions.WithColonSeparatorInTime or NSISO8601DateFormatOptions.WithColonSeparatorInTimeZone;
+      var options := NSISO8601DateFormatOptions.WithFractionalSeconds;
       var formatter := new NSISO8601DateFormatter;
       formatter.timeZone := NSTimeZone.localTimeZone;
       formatter.formatOptions := options;
       exit formatter;
     end;
+
+  class property FormatterForToString : NSISO8601DateFormatter read
+    begin
+      var options := NSISO8601DateFormatOptions.WithInternetDateTime or NSISO8601DateFormatOptions.WithDashSeparatorInDate or NSISO8601DateFormatOptions.WithColonSeparatorInTime or NSISO8601DateFormatOptions.WithColonSeparatorInTimeZone ;
+      var formatter := new NSISO8601DateFormatter;
+      formatter.timeZone := NSTimeZone.localTimeZone;
+      formatter.formatOptions := options;
+      exit formatter;
+    end;
+
   {$ENDIF}
 
   public
@@ -37,19 +47,19 @@ type
       {$IFDEF ECHOES}
       exit System.DateTime.ParseExact(value, DefaultDateTimeFormat,nil);
       {$ELSEIF TOFFEE}
-      exit StandardFormatter.dateFromString(value);
+      exit FormatterForParsing.dateFromString(value);
       {$ELSE}
       raise new RemObjects.Elements.RTL.NotImplementedException;
       {$ENDIF}
 
     end;
 
-    class method ToISO8601(value:RemObjects.Elements.RTL.DateTime):String;
+    class method ToISO8601(value:RemObjects.Elements.RTL.DateTime):RemObjects.Elements.RTL.String;
     begin
       {$IFDEF ECHOES}
       exit RemObjects.Elements.RTL.PlatformDateTime(value).ToString(DefaultDateTimeFormat, System.Globalization.CultureInfo.CurrentCulture);
       {$ELSEIF TOFFEE}
-      exit StandardFormatter.stringFromDate(value);
+      exit FormatterForToString.stringFromDate(value);
       {$ELSE}
       raise RemObjects.Elements.RTL.NotImplementedException;
       {$ENDIF}
