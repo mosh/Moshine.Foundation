@@ -115,6 +115,10 @@ type
               begin
                 stringResponse := new NSString withData(data) encoding(NSStringEncoding.NSUTF8StringEncoding);
               end;
+            end
+            else
+            begin
+              reason := error.localizedDescription;
             end;
 
             dispatch_semaphore_signal(semaphore);

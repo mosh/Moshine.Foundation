@@ -49,9 +49,17 @@ type
       begin
         value := $'{span.Days} Days {span.Hours} Hours {span.Minutes} minutes';
       end
-      else
+      else if (span.Hours > 0) then
       begin
         value := $'{span.Hours} Hours {span.Minutes} minutes';
+      end
+      else if (span.Minutes > 0)then
+      begin
+        value := $'{span.Minutes} minutes';
+      end
+      else
+      begin
+        value := 'No time has been recorded';
       end;
       exit value;
     end;
