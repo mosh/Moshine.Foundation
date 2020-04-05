@@ -18,7 +18,8 @@ type
 
   WebProxy = public class
 
-
+  private
+    const UnknownHttpStatusCode = 0;
   protected
 
     _requestBuilder:RequestBuilderDelegate;
@@ -80,8 +81,8 @@ type
         request.JsonBody := stringForData;
       end;
 
-      var reason:NSString := nil;
-      var statusCode:NSInteger := 0;
+      var errorReason:NSString := nil;
+      var httpStatusCode:NSInteger := 0;
 
       var outerExecutionBlock: NSBlockOperation := NSBlockOperation.blockOperationWithBlock(method() begin
 
@@ -100,25 +101,34 @@ type
               begin
                 var httpResponse := response as NSHTTPURLResponse;
 
-                statusCode := httpResponse.statusCode;
+                httpStatusCode := httpResponse.statusCode;
 
-                NSLog('UrlResponse Method %@ Url %@ Response %ld',webMethod,url,statusCode);
+                NSLog('UrlResponse Method %@ Url %@ Response %ld',webMethod,url,httpStatusCode);
 
-                if(statusCode <> 200)then
+                if(httpStatusCode <> 200)then
                 begin
-                  reason := NSString.stringWithFormat('Url  %@ returned Invalid Status Code %ld', url, statusCode);
+                  errorReason := NSString.stringWithFormat('Url  %@ returned Invalid Status Code %ld', url, httpStatusCode);
                 end;
 
               end;
 
-              if(String.IsNullOrEmpty(reason))then
+              if(String.IsNullOrEmpty(errorReason))then
               begin
                 stringResponse := new NSString withData(data) encoding(NSStringEncoding.NSUTF8StringEncoding);
               end;
             end
             else
             begin
-              reason := error.localizedDescription;
+              case error.domain of
+                NSURLErrorDomain:
+                  begin
+                    case error.code of
+                      NSURLErrorCannotConnectToHost:
+                        httpStatusCode := 503;
+                    end;
+                  end;
+              end;
+              errorReason := error.localizedDescription;
             end;
 
             dispatch_semaphore_signal(semaphore);
@@ -133,24 +143,28 @@ type
       var workerQueue := new NSOperationQueue;
       workerQueue.addOperations([outerExecutionBlock]) waitUntilFinished(true);
 
-      if(not String.IsNullOrEmpty(reason))then
+      if(not String.IsNullOrEmpty(errorReason))then
       begin
-        if(statusCode = 0)then
-        begin
-          raise new ProxyException withName('ProxyException') reason(reason) userInfo(nil) FromUrl(url);
-        end
-        else
-        begin
-          if(statusCode = 401)then
-          begin
-            NSLog('%@','raising AuthenticationRequiredException from 401 statusCode');
-            raise new AuthenticationRequiredException withName('AuthenticationRequired') reason('authentication required from 401 statusCode') userInfo(nil) FromUrl(url);
-          end
+
+        case httpStatusCode of
+          UnknownHttpStatusCode :
+            begin
+              raise new ProxyException withName('ProxyException') reason(errorReason) userInfo(nil) FromUrl(url);
+            end;
+          401:
+            begin
+              raise new AuthenticationRequiredException withName('AuthenticationRequired') reason('authentication required from 401 statusCode') userInfo(nil) FromUrl(url);
+            end;
+          503:
+            begin
+              raise new HttpStatusCodeException withName('ProxyException') reason('Service Unavailable') userInfo(nil) FromUrl(url);
+            end;
           else
-          begin
-            raise new HttpStatusCodeException withName('ProxyException') reason(reason) userinfo(nil) StatusCode(statusCode) FromUrl(url);
-          end;
+            begin
+              raise new HttpStatusCodeException withName('ProxyException') reason(errorReason) userinfo(nil) StatusCode(httpStatusCode) FromUrl(url);
+            end;
         end;
+
       end;
 
       exit stringResponse;
