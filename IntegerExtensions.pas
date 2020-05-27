@@ -47,15 +47,25 @@ type
 
       if(span.Days > 0)then
       begin
-        value := $'{span.Days} Days {span.Hours} Hours {span.Minutes} minutes';
+        value := $'{span.Days} Day(s)';
+
+        if(span.Hours > 0)then
+        begin
+          value := value + ' {span.Hours} Hour(s)';
+        end;
+        if(span.Minutes > 0)then
+        begin
+          value := value + ' {span.Minutes} Minute(s)';
+        end;
+
       end
       else if (span.Hours > 0) then
       begin
-        value := $'{span.Hours} Hours {span.Minutes} minutes';
+        value := iif(span.Minutes > 0, $'{span.Hours} Hour(s) {span.Minutes} Minute(s)', $'{span.Hours} Hour(s)');
       end
       else if (span.Minutes > 0)then
       begin
-        value := $'{span.Minutes} minutes';
+        value := $'{span.Minutes} Minute(s)';
       end
       else
       begin
