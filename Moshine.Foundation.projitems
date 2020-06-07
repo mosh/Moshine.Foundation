@@ -1,12 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
     <SharedGUID>{285F1F89-A475-4B02-B1D2-5DDD0E228100}</SharedGUID>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration">
     <Import_RootNamespace>Moshine.Foundation</Import_RootNamespace>
+    <ProjectGuid>{7602D36D-9960-42EF-AAC3-C2E0CEDAC697}</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)WebProxy.pas" />

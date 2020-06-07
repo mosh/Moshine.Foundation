@@ -177,7 +177,7 @@ type
 
       var stringResponse := WebRequestAsString(webMethod, url, jsonBody, addAuthentication);
 
-      if (not string.IsNullOrEmpty(stringResponse)) then
+      if (not String.IsNullOrEmpty(stringResponse)) then
       begin
         var data := NSString(stringResponse).dataUsingEncoding(NSStringEncoding.NSUTF8StringEncoding);
         var jsonError:NSError;
