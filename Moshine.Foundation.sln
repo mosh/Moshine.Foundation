@@ -3,10 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # RemObjects Fire
 Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation", "Moshine.Foundation.elements", "{285F1F89-A475-4B02-B1D2-5DDD0E228100}"
 EndProject
+Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "libMoshine.Foundation", "libMoshine.Foundation.elements", "{F1442C9F-3C63-4757-A1BC-87FEE86952E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AnyCPU = Debug|AnyCPU
+		Release|AnyCPU = Release|AnyCPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1442C9F-3C63-4757-A1BC-87FEE86952E0}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{F1442C9F-3C63-4757-A1BC-87FEE86952E0}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{F1442C9F-3C63-4757-A1BC-87FEE86952E0}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{F1442C9F-3C63-4757-A1BC-87FEE86952E0}.Release|AnyCPU.Build.0 = Release|AnyCPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
