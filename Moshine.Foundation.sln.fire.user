@@ -19,11 +19,11 @@
 	<key>FolderExpanded_libMoshine.Foundation_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/libMoshine.Foundation/libMoshine.Foundation.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/libMoshine.Foundation/</key>
 	<true/>
 	<key>LastBuildStatusLabel</key>
-	<string>Last build was successful (2 warnings, 26 hints)</string>
+	<string>Last build was successful (26 hints)</string>
 	<key>NavigationPaneActiveTab</key>
 	<integer>0</integer>
 	<key>SelectedNode</key>
-	<string>/Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/libMoshine.Foundation.elements---References</string>
+	<string>file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/DateTimeExtensions.pas</string>
 	<key>ViewMetaData</key>
 	<dict>
 		<key>/Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.sln---BuildLog</key>
@@ -83,7 +83,7 @@
 			<key>ScrollX</key>
 			<real>0.0</real>
 			<key>ScrollY</key>
-			<real>0.0</real>
+			<real>26</real>
 			<key>SelectionCursorUndecided</key>
 			<false/>
 			<key>SelectionEndColumn</key>
@@ -283,12 +283,12 @@
 		</dict>
 	</dict>
 	<key>Window_Height</key>
-	<real>813</real>
+	<real>1013</real>
 	<key>Window_Width</key>
-	<real>1212</real>
+	<real>1465</real>
 	<key>Window_X</key>
-	<real>311</real>
+	<real>31</real>
 	<key>Window_Y</key>
-	<real>295</real>
+	<real>176</real>
 </dict>
 </plist>
