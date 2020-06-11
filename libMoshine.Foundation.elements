@@ -20,7 +20,7 @@
     <Mode>Toffee</Mode>
     <SubMode>iOS</SubMode>
     <SDK>iOS</SDK>
-    <DeploymentTargetVersion>7.0</DeploymentTargetVersion>
+    <DeploymentTargetVersion>13.0</DeploymentTargetVersion>
     <SupportUIKitForMac>True</SupportUIKitForMac>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Target)' == 'tvOS' ">
@@ -52,9 +52,19 @@
     <Reference Include="libToffee" />
     <Reference Include="libElements" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(Target)' == 'iOS' ">
-    <Reference Include="SystemConfiguration" />
-  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SystemConfiguration">
+      <Target>iOS</Target>
+    </Reference>
+  </ItemGroup>  
+
+  <ItemGroup>
+    <Reference Include="SystemConfiguration">
+      <Target>macOS</Target>
+    </Reference>
+  </ItemGroup>  
+
   <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.Toffee.targets" />
-  <Import Project="Moshine.Foundation.projitems" Label="Shared" />
+  <Import Project="Moshine.Foundation.Shared.projitems" Label="Shared" />
 </Project>
