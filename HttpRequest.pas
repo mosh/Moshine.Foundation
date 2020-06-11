@@ -48,7 +48,7 @@ type
     begin
 
       self := new NSMutableURLRequest() withURL( new NSURL() withString( url ));
-      self.setHTTPMethod(webMethod);
+      self.setHttpMethod(webMethod);
 
     end;
 
