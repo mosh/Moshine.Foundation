@@ -1,39 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
-    <RootNamespace>libMoshine.Foundation</RootNamespace>
-    <ProjectGuid>{F1442C9F-3C63-4757-A1BC-87FEE86952E0}</ProjectGuid>
-    <OutputType>StaticLibrary</OutputType>
+    <RootNamespace>DynMoshine.Foundation</RootNamespace>
+    <ProjectGuid>{30020CD8-5418-46FA-9CC5-55CAC0FBD933}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
     <SDK>iOS</SDK>
     <MangleTypeNames>True</MangleTypeNames>
     <CreateHeaderFile>True</CreateHeaderFile>
+    <DefaultUses>RemObjects.Elements.RTL</DefaultUses>
+    <CreateFrameworkBundle>True</CreateFrameworkBundle>
     <BinaryName>Moshine.Foundation</BinaryName>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Target)' == 'macOS' ">
-    <Mode>Toffee</Mode>
-    <SubMode>macOS</SubMode>
-    <SDK>macOS</SDK>
-    <DeploymentTargetVersion>10.10</DeploymentTargetVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Target)' == 'iOS' ">
-    <Mode>Toffee</Mode>
-    <SubMode>iOS</SubMode>
-    <SDK>iOS</SDK>
-    <DeploymentTargetVersion>13.0</DeploymentTargetVersion>
-    <SupportUIKitForMac>True</SupportUIKitForMac>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Target)' == 'tvOS' ">
-    <Mode>Toffee</Mode>
-    <SubMode>tvOS</SubMode>
-    <SDK>tvOS</SDK>
-    <DeploymentTargetVersion>9.0</DeploymentTargetVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Target)' == 'watchOS' ">
-    <Mode>Toffee</Mode>
-    <SubMode>watchOS</SubMode>
-    <SDK>watchOS</SDK>
-    <DeploymentTargetVersion>3.0</DeploymentTargetVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <Optimize>False</Optimize>
@@ -44,20 +21,18 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <OutputPath>.\Bin\Release</OutputPath>
+    <GenerateDSym>True</GenerateDSym>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CoreGraphics" />
     <Reference Include="Foundation" />
+    <Reference Include="UIKit" />
     <Reference Include="rtl" />
     <Reference Include="libToffee" />
     <Reference Include="libElements" />
-    <Reference Include="SystemConfiguration">
-      <Target>iOS</Target>
-    </Reference>
-    <Reference Include="SystemConfiguration">
-      <Target>macOS</Target>
-    </Reference>
+    <Reference Include="SystemConfiguration" />
   </ItemGroup>
+  <ItemGroup></ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.Toffee.targets" />
   <Import Project="Moshine.Foundation.Shared.projitems" Label="Shared" />
 </Project>
