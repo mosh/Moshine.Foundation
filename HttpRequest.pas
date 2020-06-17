@@ -43,15 +43,29 @@ type
           raise new ArgumentException($'Invalid method {webMethod}');
       end;
     end;
-    {$ENDIF}
-
-    {$IFDEF TOFFEE}
+    {$ELSEIF TOFFEE}
     constructor (webMethod:String; url:String);
     begin
-
       self := new NSMutableURLRequest() withURL( new NSURL() withString( url ));
       self.setHttpMethod(webMethod);
+    end;
 
+    {$ELSE}
+    constructor (webMethod:String; url:String);
+    begin
+      self := new PlatformHttpRequest(RemObjects.Elements.RTL.Url.UrlWithString(url), MethodToHttpMethod(webMethod));
+    end;
+
+    class method MethodToHttpMethod(webMethod:String):HttpRequestMode;
+    begin
+      exit case webMethod of
+        'GET': HttpRequestMode.Get;
+        'PUT': HttpRequestMode.Put;
+        'POST': HttpRequestMode.Post;
+        'DELETE': HttpRequestMode.Delete;
+        else
+          raise new ArgumentException($'Invalid method {webMethod}');
+      end;
     end;
 
     {$ENDIF}

@@ -4,7 +4,11 @@
 <dict>
 	<key>ActiveProjectFor_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.Shared.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/DateTimeExtensions.pas</key>
 	<string>file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/libMoshine.Foundation.elements</string>
+	<key>ActiveProjectFor_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.Shared.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/HttpRequest.pas</key>
+	<string>file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/libMoshine.Foundation.elements</string>
 	<key>ActiveTargetFor_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.Shared.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/DateTimeExtensions.pas</key>
+	<string>target:///linux</string>
+	<key>ActiveTargetFor_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.Shared.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/HttpRequest.pas</key>
 	<string>target:///linux</string>
 	<key>DebugPaneActiveTab</key>
 	<integer>0</integer>
@@ -29,11 +33,11 @@
 	<key>LastBuildStatusLabel</key>
 	<string>Last build was successful (13 hints)</string>
 	<key>NavigationPaneActiveTab</key>
-	<integer>0</integer>
+	<integer>4</integer>
 	<key>ProjectCollapsed_DynMoshine.Foundation</key>
 	<true/>
 	<key>SelectedNode</key>
-	<string>file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.Shared.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/WebProxy.pas</string>
+	<string>file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.Shared.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/HttpRequest.pas</string>
 	<key>ViewMetaData</key>
 	<dict>
 		<key>/Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.sln---BuildLog</key>
@@ -58,6 +62,29 @@
 			<false/>
 			<key>SelectionStartColumn</key>
 			<integer>0</integer>
+			<key>SelectionStartLine</key>
+			<integer>-1</integer>
+		</dict>
+		<key>buildmessage://1:56:67-file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/HttpRequest.pas</key>
+		<dict>
+			<key>CursorX</key>
+			<integer>63</integer>
+			<key>CursorY</key>
+			<integer>55</integer>
+			<key>ScrollX</key>
+			<real>0.0</real>
+			<key>ScrollY</key>
+			<real>721</real>
+			<key>SelectionCursorUndecided</key>
+			<false/>
+			<key>SelectionEndColumn</key>
+			<integer>-1</integer>
+			<key>SelectionEndLine</key>
+			<integer>-1</integer>
+			<key>SelectionIsLinear</key>
+			<true/>
+			<key>SelectionStartColumn</key>
+			<integer>-1</integer>
 			<key>SelectionStartLine</key>
 			<integer>-1</integer>
 		</dict>
@@ -110,13 +137,13 @@
 		<key>file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.Shared.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/HttpRequest.pas</key>
 		<dict>
 			<key>CursorX</key>
-			<integer>67</integer>
+			<integer>91</integer>
 			<key>CursorY</key>
-			<integer>17</integer>
+			<integer>55</integer>
 			<key>ScrollX</key>
 			<real>0.0</real>
 			<key>ScrollY</key>
-			<real>32</real>
+			<real>462</real>
 			<key>SelectionCursorUndecided</key>
 			<false/>
 			<key>SelectionEndColumn</key>
@@ -127,6 +154,52 @@
 			<true/>
 			<key>SelectionStartColumn</key>
 			<integer>-1</integer>
+			<key>SelectionStartLine</key>
+			<integer>-1</integer>
+		</dict>
+		<key>file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.Shared.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/IntegerExtensions.pas</key>
+		<dict>
+			<key>CursorX</key>
+			<integer>0</integer>
+			<key>CursorY</key>
+			<integer>0</integer>
+			<key>ScrollX</key>
+			<real>0.0</real>
+			<key>ScrollY</key>
+			<real>337</real>
+			<key>SelectionCursorUndecided</key>
+			<false/>
+			<key>SelectionEndColumn</key>
+			<integer>0</integer>
+			<key>SelectionEndLine</key>
+			<integer>0</integer>
+			<key>SelectionIsLinear</key>
+			<false/>
+			<key>SelectionStartColumn</key>
+			<integer>0</integer>
+			<key>SelectionStartLine</key>
+			<integer>-1</integer>
+		</dict>
+		<key>file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.Shared.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/NSDateExtensions.pas</key>
+		<dict>
+			<key>CursorX</key>
+			<integer>0</integer>
+			<key>CursorY</key>
+			<integer>0</integer>
+			<key>ScrollX</key>
+			<real>0.0</real>
+			<key>ScrollY</key>
+			<real>641</real>
+			<key>SelectionCursorUndecided</key>
+			<false/>
+			<key>SelectionEndColumn</key>
+			<integer>0</integer>
+			<key>SelectionEndLine</key>
+			<integer>0</integer>
+			<key>SelectionIsLinear</key>
+			<false/>
+			<key>SelectionStartColumn</key>
+			<integer>0</integer>
 			<key>SelectionStartLine</key>
 			<integer>-1</integer>
 		</dict>
