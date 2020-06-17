@@ -3,7 +3,7 @@
 uses
   {$IF TOFFEE}
   Foundation,
-  {$ELSE}
+  {$ELSEIF ECHOES}
   System.Net.Http,
   {$ENDIF}
   RemObjects.Elements.RTL;
@@ -14,6 +14,8 @@ type
   PlatformHttpRequest = public NSMutableURLRequest;
   {$ELSEIF ECHOES}
   PlatformHttpRequest = public HttpRequestMessage;
+  {$ELSE}
+  PlatformHttpRequest = public RemObjects.Elements.RTL.HttpRequest;
   {$ENDIF}
 
   HttpRequest = public class mapped to PlatformHttpRequest

@@ -3,7 +3,7 @@
 uses
   {$IF TOFFEE}
   Foundation,
-  {$ELSE}
+  {$ELSEIF ECHOES}
   Newtonsoft.Json,
   System.Net.Http,
   {$ENDIF}
@@ -28,7 +28,7 @@ type
     begin
       {$IFDEF TOFFEE}
       exit WebRequestAsObject(webMethod,url,addAuthentication) as T;
-      {$ELSE}
+      {$ELSEIF ECHOES}
       exit JsonConvert.DeserializeObject<T>(WebRequestAsString(webMethod, url, nil,addAuthentication));
       {$ENDIF}
     end;
@@ -37,6 +37,14 @@ type
     begin
       exit WebRequestAsObject(webMethod, url, nil,addAuthentication);
     end;
+
+    {$IFDEF ISLAND}
+    method WebRequestAsObject(webMethod:String; url:String; obj:Object; addAuthentication:Boolean := true):Object;
+    begin
+      raise new NotImplementedException;
+    end;
+    {$ENDIF}
+
 
     {$IF TOFFEE}
     method WebRequestAs<T>(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):T;
@@ -196,7 +204,7 @@ type
       exit nil;
 
     end;
-    {$ELSE}
+    {$ELSEIF ECHOES}
 
 
     method WebRequestAsString(webMethod:String; url:String; jsonBody:Object;addAuthentication:Boolean := true):String;

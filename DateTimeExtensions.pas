@@ -74,7 +74,7 @@ type
       {$ELSEIF TOFFEE}
       exit FormatterForToString.stringFromDate(value);
       {$ELSE}
-      raise RemObjects.Elements.RTL.NotImplementedException;
+      raise new RemObjects.Elements.RTL.NotImplementedException;
       {$ENDIF}
     end;
 
@@ -85,7 +85,7 @@ type
       {$ELSEIF TOFFEE}
       exit new RemObjects.Elements.RTL.PlatformDateTime;
       {$ELSE}
-      raise RemObjects.Elements.RTL.NotImplementedException;
+      raise new RemObjects.Elements.RTL.NotImplementedException;
       {$ENDIF}
 
     end;
