@@ -247,6 +247,13 @@ type
       exit JsonConvert.DeserializeObject<Dictionary<String,Object>>(WebRequestAsString(webMethod, url, jsonBody, addAuthentication));
     end;
 
+    {$ELSE}
+
+    method WebRequestAsString(webMethod:String; url:String; jsonBody:Object;addAuthentication:Boolean := true):String;
+    begin
+      raise new NotImplementedException;
+    end;
+
     {$ENDIF}
 
   end;

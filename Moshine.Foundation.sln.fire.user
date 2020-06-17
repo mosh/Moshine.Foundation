@@ -9,7 +9,7 @@
 	<key>DebugPaneActiveTab</key>
 	<integer>0</integer>
 	<key>ExplorerSplitter</key>
-	<real>415</real>
+	<real>389</real>
 	<key>FinalOutputFileXml_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/DynMoshine.Foundation.elements_Debug</key>
 	<string>/Users/JohnMoshakis/Library/Application Support/RemObjects Software/EBuild/Obj/DynMoshine.Foundation-63C4560640DD9DBE9C8ADD31654710303C7C3C66/Debug/FinalOutput.xml</string>
 	<key>FinalOutputFileXml_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.elements_Debug</key>
@@ -18,11 +18,9 @@
 	<string>/Users/JohnMoshakis/Library/Application Support/RemObjects Software/EBuild/Obj/libMoshine.Foundation-3D334A36AE981F4E10418F6CFD047136501E01A1/Debug/FinalOutput.xml</string>
 	<key>FolderExpanded_Moshine.Foundation.Shared_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.Shared.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/</key>
 	<true/>
-	<key>FolderExpanded_Moshine.Foundation_/Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.elements---References</key>
-	<true/>
 	<key>FolderExpanded_Moshine.Foundation_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/</key>
 	<true/>
-	<key>FolderExpanded_libMoshine.Foundation_/Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/libMoshine.Foundation.elements---References</key>
+	<key>FolderExpanded_libMoshine.Foundation_/Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/libMoshine.Foundation.elements---Targets</key>
 	<true/>
 	<key>FolderExpanded_libMoshine.Foundation_/Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/libMoshine.Foundation/libMoshine.Foundation.elements---References</key>
 	<true/>
@@ -32,8 +30,10 @@
 	<string>Last build was successful (13 hints)</string>
 	<key>NavigationPaneActiveTab</key>
 	<integer>0</integer>
+	<key>ProjectCollapsed_DynMoshine.Foundation</key>
+	<true/>
 	<key>SelectedNode</key>
-	<string>file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/libMoshine.Foundation.elements_watchOS_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/libMoshine.Foundation.elements</string>
+	<string>file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.Shared.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/WebProxy.pas</string>
 	<key>ViewMetaData</key>
 	<dict>
 		<key>/Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.sln---BuildLog</key>
@@ -156,13 +156,13 @@
 		<key>file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.Shared.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/WebProxy.pas</key>
 		<dict>
 			<key>CursorX</key>
-			<integer>16</integer>
+			<integer>0</integer>
 			<key>CursorY</key>
-			<integer>43</integer>
+			<integer>254</integer>
 			<key>ScrollX</key>
 			<real>0.0</real>
 			<key>ScrollY</key>
-			<real>240</real>
+			<real>3217</real>
 			<key>SelectionCursorUndecided</key>
 			<false/>
 			<key>SelectionEndColumn</key>
@@ -431,12 +431,12 @@
 		</dict>
 	</dict>
 	<key>Window_Height</key>
-	<real>1012</real>
+	<real>1072</real>
 	<key>Window_Width</key>
-	<real>1373</real>
+	<real>1564</real>
 	<key>Window_X</key>
-	<real>94</real>
+	<real>99</real>
 	<key>Window_Y</key>
-	<real>71</real>
+	<real>128</real>
 </dict>
 </plist>
