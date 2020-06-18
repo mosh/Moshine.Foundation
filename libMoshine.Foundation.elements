@@ -13,7 +13,6 @@
     <Mode>Toffee</Mode>
     <SubMode>macOS</SubMode>
     <SDK>macOS</SDK>
-    <DeploymentTargetVersion>10.10</DeploymentTargetVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Target)' == 'linux' ">
     <Mode>Island</Mode>
@@ -23,20 +22,17 @@
     <Mode>Toffee</Mode>
     <SubMode>iOS</SubMode>
     <SDK>iOS</SDK>
-    <DeploymentTargetVersion>13.0</DeploymentTargetVersion>
-    <SupportUIKitForMac>True</SupportUIKitForMac>
+    <SupportUIKitForMac>False</SupportUIKitForMac>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Target)' == 'tvOS' ">
     <Mode>Toffee</Mode>
     <SubMode>tvOS</SubMode>
     <SDK>tvOS</SDK>
-    <DeploymentTargetVersion>9.0</DeploymentTargetVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Target)' == 'watchOS' ">
     <Mode>Toffee</Mode>
     <SubMode>watchOS</SubMode>
     <SDK>watchOS</SDK>
-    <DeploymentTargetVersion>3.0</DeploymentTargetVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <Optimize>False</Optimize>

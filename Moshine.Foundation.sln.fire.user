@@ -31,13 +31,13 @@
 	<key>FolderExpanded_libMoshine.Foundation_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/libMoshine.Foundation/libMoshine.Foundation.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/libMoshine.Foundation/</key>
 	<true/>
 	<key>LastBuildStatusLabel</key>
-	<string>Last build was successful (13 hints)</string>
+	<string>Last build was successful</string>
 	<key>NavigationPaneActiveTab</key>
 	<integer>4</integer>
 	<key>ProjectCollapsed_DynMoshine.Foundation</key>
 	<true/>
 	<key>SelectedNode</key>
-	<string>file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.Shared.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/HttpRequest.pas</string>
+	<string>/Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.sln---BuildLog</string>
 	<key>ViewMetaData</key>
 	<dict>
 		<key>/Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.sln---BuildLog</key>
@@ -137,13 +137,13 @@
 		<key>file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/Moshine.Foundation.Shared.elements_file:///Users/JohnMoshakis/Documents/develop/Nougat/Moshine.Foundation/HttpRequest.pas</key>
 		<dict>
 			<key>CursorX</key>
-			<integer>91</integer>
+			<integer>63</integer>
 			<key>CursorY</key>
 			<integer>55</integer>
 			<key>ScrollX</key>
 			<real>0.0</real>
 			<key>ScrollY</key>
-			<real>462</real>
+			<real>721</real>
 			<key>SelectionCursorUndecided</key>
 			<false/>
 			<key>SelectionEndColumn</key>
