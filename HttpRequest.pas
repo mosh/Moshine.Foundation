@@ -53,10 +53,10 @@ type
     {$ELSE}
     constructor (webMethod:String; url:String);
     begin
-      self := new PlatformHttpRequest(RemObjects.Elements.RTL.Url.UrlWithString(url), MethodToHttpMethod(webMethod));
+      self := new PlatformHttpRequest(RemObjects.Elements.RTL.Url.UrlWithString(url), MethodToHttpRequestMode(webMethod));
     end;
 
-    class method MethodToHttpMethod(webMethod:String):HttpRequestMode;
+    class method MethodToHttpRequestMode(webMethod:String):HttpRequestMode;
     begin
       exit case webMethod of
         'GET': HttpRequestMode.Get;
@@ -76,6 +76,8 @@ type
       mapped.setValue(value) forHTTPHeaderField(name);
       {$ELSEIF ECHOES}
       mapped.Headers.Add(name,value);
+      {$ELSE}
+      mapped.Headers.Add(name,value);
       {$ENDIF}
 
     end;
@@ -85,9 +87,8 @@ type
       begin
         {$IFDEF TOFFEE}
         mapped.setHTTPMethod(value);
-        {$ENDIF}
-
-        {$IFDEF ECHOES}
+        {$ELSEIF ECHOES}
+        {$ELSE}
         {$ENDIF}
       end;
 
@@ -103,13 +104,13 @@ type
 
         mapped.setHTTPBody(data);
 
-        {$ENDIF}
-
-        {$IFDEF ECHOES}
+        {$ELSEIF ECHOES}
         var content := new StringContent(value, Encoding.UTF8, 'application/json');
         mapped.Content := content;
+        {$ELSE}
+        mapped.Headers.Add('Content-Type','application/json; charset=utf-8');
+        mapped.Content := new HttpBinaryRequestContent(value, Encoding.UTF8);
         {$ENDIF}
-
 
       end;
 

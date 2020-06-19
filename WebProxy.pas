@@ -236,9 +236,7 @@ type
         exit response.Content.ReadAsStringAsync.Result;
       end;
 
-      var exception := new HttpStatusCodeException();
-      exception.StatusCode := Integer(response.StatusCode);
-      raise exception;
+      raise new HttpStatusCodeException(Integer(response.StatusCode));
 
     end;
 
@@ -251,7 +249,22 @@ type
 
     method WebRequestAsString(webMethod:String; url:String; jsonBody:Object;addAuthentication:Boolean := true):String;
     begin
-      raise new NotImplementedException;
+      var request := new HttpRequest(webMethod, url);
+      if(assigned(jsonBody))then
+      begin
+        //request.JsonBody :=
+        raise new NotImplementedException;
+      end;
+
+      var response := Http.ExecuteRequestSynchronous(request);
+
+      if(response.Success)then
+      begin
+        exit response.GetContentAsStringSynchronous;
+      end;
+
+      raise new HttpStatusCodeException(response.Code);
+
     end;
 
     {$ENDIF}

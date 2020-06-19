@@ -52,6 +52,12 @@ type
       self.Url := aUrl;
       self.StatusCode := aCode;
     end;
+    {$ELSE}
+    constructor(aStatusCode:Integer);
+    begin
+      inherited constructor('');
+      self.StatusCode := aStatusCode;
+    end;
     {$ENDIF}
 
 
