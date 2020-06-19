@@ -41,7 +41,7 @@ type
     {$IFDEF ISLAND}
     method WebRequestAsObject(webMethod:String; url:String; obj:Object; addAuthentication:Boolean := true):Object;
     begin
-      raise new NotImplementedException;
+      raise new NotImplementedException('WebRequestAsObject not implemented on this platform');
     end;
     {$ENDIF}
 
@@ -253,7 +253,7 @@ type
       if(assigned(jsonBody))then
       begin
         //request.JsonBody :=
-        raise new NotImplementedException;
+        raise new NotImplementedException('JsonBody not implemented on this platform.');
       end;
 
       var response := Http.ExecuteRequestSynchronous(request);

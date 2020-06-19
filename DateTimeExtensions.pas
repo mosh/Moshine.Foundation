@@ -62,7 +62,7 @@ type
       end;
       exit outValue;
       {$ELSE}
-      raise new RemObjects.Elements.RTL.NotImplementedException;
+      raise new RemObjects.Elements.RTL.NotImplementedException('ParseISO8601DateTime not implemented on this platform.');
       {$ENDIF}
 
     end;
@@ -74,7 +74,7 @@ type
       {$ELSEIF TOFFEE}
       exit FormatterForToString.stringFromDate(value);
       {$ELSE}
-      raise new RemObjects.Elements.RTL.NotImplementedException;
+      raise new RemObjects.Elements.RTL.NotImplementedException('ToISO8601 not implemented on this platform.');
       {$ENDIF}
     end;
 
@@ -85,7 +85,7 @@ type
       {$ELSEIF TOFFEE}
       exit new RemObjects.Elements.RTL.PlatformDateTime;
       {$ELSE}
-      raise new RemObjects.Elements.RTL.NotImplementedException;
+      raise new RemObjects.Elements.RTL.NotImplementedException('Now not implemented on this platform.');
       {$ENDIF}
 
     end;
