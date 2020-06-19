@@ -90,6 +90,19 @@ type
 
     end;
 
+    class method TimeSinceEpoch:Double;
+    begin
+      {$IF ECHOES}
+      exit DateTimeOffset.Now.ToUnixTimeSeconds;
+      {$ELSEIF TOFFEE}
+      var date := new Foundation.NSDate;
+      exit date.timeIntervalSince1970;
+      {$ELSE}
+      raise new NotImplementedException;
+      {$ENDIF}
+    end;
+
+
   end;
 
 end.
