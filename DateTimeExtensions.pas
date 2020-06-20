@@ -62,32 +62,27 @@ type
       end;
       exit outValue;
       {$ELSE}
-      raise new RemObjects.Elements.RTL.NotImplementedException('ParseISO8601DateTime not implemented on this platform.');
+      exit RemObjects.Elements.RTL.DateTime.ParseISO8601DateTime(value);
       {$ENDIF}
 
     end;
 
     class method ToISO8601(value:RemObjects.Elements.RTL.DateTime):RemObjects.Elements.RTL.String;
     begin
-      {$IFDEF ECHOES}
-      exit RemObjects.Elements.RTL.PlatformDateTime(value).ToString(DefaultDateTimeFormat, System.Globalization.CultureInfo.CurrentCulture);
-      {$ELSEIF TOFFEE}
+      {$IF TOFFEE}
       exit FormatterForToString.stringFromDate(value);
-      {$ELSE}
-      raise new RemObjects.Elements.RTL.NotImplementedException('ToISO8601 not implemented on this platform.');
+      {$ELSE
+      exit RemObjects.Elements.RTL.PlatformDateTime(value).ToString(DefaultDateTimeFormat, System.Globalization.CultureInfo.CurrentCulture);
       {$ENDIF}
     end;
 
     class method Now:RemObjects.Elements.RTL.DateTime;
     begin
-      {$IFDEF ECHOES}
-      exit RemObjects.Elements.RTL.PlatformDateTime.Now;
-      {$ELSEIF TOFFEE}
+      {$IF TOFFEE}
       exit new RemObjects.Elements.RTL.PlatformDateTime;
       {$ELSE}
-      raise new RemObjects.Elements.RTL.NotImplementedException('Now not implemented on this platform.');
+      exit RemObjects.Elements.RTL.PlatformDateTime.Now;
       {$ENDIF}
-
     end;
 
     class method TimeSinceEpoch:Double;
@@ -98,7 +93,8 @@ type
       var date := new Foundation.NSDate;
       exit date.timeIntervalSince1970;
       {$ELSE}
-      raise new NotImplementedException;
+      var span := RemObjects.Elements.Rtl.DateTime.TimeSince(new RemObjects.Elements.RTL.DateTime(1970,1,1));
+      exit Int64(span.TotalSeconds);
       {$ENDIF}
     end;
 
