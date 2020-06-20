@@ -71,8 +71,10 @@ type
     begin
       {$IF TOFFEE}
       exit FormatterForToString.stringFromDate(value);
-      {$ELSE
+      {$ELSEIF ECHOES}
       exit RemObjects.Elements.RTL.PlatformDateTime(value).ToString(DefaultDateTimeFormat, System.Globalization.CultureInfo.CurrentCulture);
+      {$ELSE}
+      exit RemObjects.Elements.RTL.DateTime(value).ToString();
       {$ENDIF}
     end;
 
