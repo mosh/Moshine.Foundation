@@ -74,7 +74,7 @@ type
       {$ELSEIF ECHOES}
       exit RemObjects.Elements.RTL.PlatformDateTime(value).ToString(DefaultDateTimeFormat, System.Globalization.CultureInfo.CurrentCulture);
       {$ELSE}
-      exit RemObjects.Elements.RTL.DateTime(value).ToString();
+      exit $'{value.ToString('yyyy-MM-dd')}T{value.ToString('hh:mm:ss')}Z';
       {$ENDIF}
     end;
 
