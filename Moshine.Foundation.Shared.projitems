@@ -5,7 +5,7 @@
     <HasSharedItems>true</HasSharedItems>
     <SharedGUID>{285F1F89-A475-4B02-B1D2-5DDD0E228100}</SharedGUID>
     <Import_RootNamespace>Moshine.Foundation</Import_RootNamespace>
-    <ProjectGuid>{7602D36D-9960-42EF-AAC3-C2E0CEDAC697}</ProjectGuid>
+    <ProjectGuid>{285F1F89-A475-4B02-B1D2-5DDD0E228100}</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)WebProxy.pas" />
@@ -16,6 +16,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)DateTimeExtensions.pas" />
     <Compile Include="$(MSBuildThisFileDirectory)IntegerExtensions.pas" />
     <Compile Include="$(MSBuildThisFileDirectory)ApplicationHelpers.pas" />
-    <Compile Include="$(MSBuildThisFileDirectory)DateUtils.pas" />
+    <Compile Include="$(MSBuildThisFileDirectory)DoubleExtensions.pas" />
   </ItemGroup>
 </Project>
