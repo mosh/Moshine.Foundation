@@ -96,7 +96,7 @@ type
       exit date.timeIntervalSince1970;
       {$ELSE}
       var span := RemObjects.Elements.Rtl.DateTime.TimeSince(new RemObjects.Elements.RTL.DateTime(1970,1,1));
-      exit Int64(span.TotalSeconds);
+      exit Math.Round(span.TotalSeconds);
       {$ENDIF}
     end;
 
