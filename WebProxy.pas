@@ -249,7 +249,18 @@ type
 
     method WebRequestAsString(webMethod:String; url:String; jsonBody:Object;addAuthentication:Boolean := true):String;
     begin
-      var request := new HttpRequest(webMethod, url);
+
+      var request:HttpRequest;
+
+      if(not assigned(_requestBuilder))then
+      begin
+        request := new HttpRequest(webMethod, url);
+      end
+      else
+      begin
+        request := _requestBuilder(url, webMethod,addAuthentication);
+      end;
+
       if(assigned(jsonBody))then
       begin
         //request.JsonBody :=
