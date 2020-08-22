@@ -77,7 +77,7 @@ type
       {$ELSEIF ECHOES}
       mapped.Headers.Add(name,value);
       {$ELSE}
-      mapped.Headers.Add(name,value);
+      mapped.Headers.Add(name,$' {value}');
       {$ENDIF}
 
     end;
