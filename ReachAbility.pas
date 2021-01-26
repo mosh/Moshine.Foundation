@@ -1,6 +1,6 @@
 ﻿namespace Moshine.Foundation;
 
-{$IF TOFFEE}
+{$IF TOFFEE OR ISLAND}
 
 uses
   Foundation,
@@ -8,6 +8,7 @@ uses
   SystemConfiguration
   {$ENDIF}
   ;
+
 {$ENDIF}
 
 type
@@ -69,7 +70,12 @@ type
 
       var retVal := NetworkStatus.NotReachable;
 
-      if( ((&flags and kSCNetworkReachabilityFlagsReachable) = kSCNetworkReachabilityFlagsReachable) and ((&flags and kSCNetworkReachabilityFlagsIsDirect) = kSCNetworkReachabilityFlagsIsDirect))then
+      if(
+        (Int64(&flags and kSCNetworkReachabilityFlagsReachable) = kSCNetworkReachabilityFlagsReachable)
+        and
+        (Int64(&flags and kSCNetworkReachabilityFlagsIsDirect) = kSCNetworkReachabilityFlagsIsDirect)
+          )
+        then
       begin
         retVal := NetworkStatus.ReachableViaWiFi;
       end;
@@ -111,7 +117,7 @@ type
         end;
       end;
 
-      if ((&flags and kSCNetworkReachabilityFlagsIsWWAN) = kSCNetworkReachabilityFlagsIsWWAN)then
+      if (Int64(&flags and kSCNetworkReachabilityFlagsIsWWAN) = kSCNetworkReachabilityFlagsIsWWAN)then
       begin
         // ... but WWAN connections are OK if the calling application
         //     is using the CFNetwork (CFSocketStream?) APIs.
