@@ -1,42 +1,94 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
-    <ProductVersion>3.5</ProductVersion>
+    <ProjectGuid>{19E42704-1AC8-4D61-B2C5-FF63E951602F}</ProjectGuid>
+    <OutputType>StaticLibrary</OutputType>
     <RootNamespace>Moshine.Foundation</RootNamespace>
-    <ProjectGuid>{311547AE-15AD-4E04-918E-342FD6020A65}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AssemblyName>Moshine.Foundation</AssemblyName>
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
-    <TargetFramework>.NETStandard</TargetFramework>
-    <Mode>Echoes</Mode>
+    <DefaultUses>RemObjects.Elements.RTL</DefaultUses>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <Optimize>False</Optimize>
     <OutputPath>.\Bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;TRACE;</DefineConstants>
-    <GeneratePDB>True</GeneratePDB>
-    <GenerateMDB>True</GenerateMDB>
     <EnableAsserts>True</EnableAsserts>
-    <CpuType>anycpu</CpuType>
-    <EnableUnmanagedDebugging>False</EnableUnmanagedDebugging>
+    <Optimize>False</Optimize>
+    <GenerateDebugInfo>True</GenerateDebugInfo>
+    <ConditionalDefines>DEBUG;TRACE;</ConditionalDefines>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <OutputPath>.\Bin\Release</OutputPath>
-    <CpuType>anycpu</CpuType>
-    <EnableUnmanagedDebugging>False</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Echoes.Core' ">
+    <Mode>Echoes</Mode>
+    <TargetFramework>.NET5.0</TargetFramework>
+    <ConditionalDefines>NETCORE</ConditionalDefines>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Echoes.Standard' ">
+    <Mode>Echoes</Mode>
+    <TargetFramework>.NETStandard2.0</TargetFramework>
+    <ConditionalDefines>NETSTANDARD</ConditionalDefines>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Island.Darwin.macOS' ">
+    <Mode>Island</Mode>
+    <SubMode>Darwin</SubMode>
+    <SDK>macOS</SDK>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Island.Darwin.iOS' ">
+    <Mode>Island</Mode>
+    <SubMode>Darwin</SubMode>
+    <SDK>iOS</SDK>
+    <SupportMacCatalyst>True</SupportMacCatalyst>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Island.Darwin.tvOS' ">
+    <Mode>Island</Mode>
+    <SubMode>Darwin</SubMode>
+    <SDK>tvOS</SDK>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Island.Darwin.watchOS' ">
+    <Mode>Island</Mode>
+    <SubMode>Darwin</SubMode>
+    <SDK>watchOS</SDK>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Toffee.iOS' ">
+    <Mode>Toffee</Mode>
+    <SDK>iOS</SDK>
+    <SupportMacCatalyst>True</SupportMacCatalyst>
+    <DefaultUses>Foundation;RemObjects.Elements.Linq</DefaultUses>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Toffee.macOS' ">
+    <Mode>Toffee</Mode>
+    <SDK>macOS</SDK>
+    <DefaultUses>Foundation;RemObjects.Elements.Linq</DefaultUses>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Toffee.tvOS' ">
+    <Mode>Toffee</Mode>
+    <SDK>tvOS</SDK>
+    <DefaultUses>Foundation;RemObjects.Elements.Linq</DefaultUses>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Toffee.watchOS' ">
+    <Mode>Toffee</Mode>
+    <SDK>watchOS</SDK>
+    <DefaultUses>Foundation;RemObjects.Elements.Linq</DefaultUses>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Echoes">
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="#" />
     <Reference Include="Elements">
       <Private>True</Private>
     </Reference>
-    <NuGetReference Include="Newtonsoft.Json:[12.0.1]">
-      <Private>True</Private>
-    </NuGetReference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(Target)' == 'Echoes.Core'">
+    <NuGetReference Include="Newtonsoft.Json:[12.0.1]" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Target)' == 'Echoes.Standard'">
+    <NuGetReference Include="Newtonsoft.Json:[12.0.1]" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Target)' == 'Toffee.iOS'">
+    <Reference Include="SystemConfiguration" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Target)' == 'Island.Darwin.iOS'">
+    <Reference Include="SystemConfiguration" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.targets" />
-  <Import Project="Moshine.Foundation.Shared.projitems" Label="Shared" />
   <Import Project="Moshine.Foundation.Shared.projitems" Label="Shared" />
 </Project>
