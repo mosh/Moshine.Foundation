@@ -11,17 +11,17 @@ uses
 type
 
   {$IF COCOA}
-  PlatformException = public NSException;
+  MoshineFoundationException = public NSException;
   {$ELSE}
-  PlatformException = public System.Exception;
+  MoshineFoundationException = public System.Exception;
   {$ENDIF}
 
 
-  ProxyException = public class (PlatformException)
+  ProxyException = public class (MoshineFoundationException)
   public
     property Url:String;
 
-    {$IF TOFFEE}
+    {$IF COCOA}
     constructor withName(aName: NSExceptionName) reason(aReason: nullable NSString) userInfo(aUserInfo: nullable NSDictionary);
     begin
       inherited constructor withName(aName) reason(aReason) userInfo(aUserInfo);
@@ -44,7 +44,7 @@ type
     property StatusCode:Integer;
 
 
-    {$IF TOFFEE}
+    {$IF COCOA}
     constructor withName(aName: NSExceptionName) reason(aReason: nullable NSString) userInfo(aUserInfo: nullable NSDictionary) StatusCode(aCode:Integer) FromUrl(aUrl:NSString);
     begin
       inherited constructor withName(aName) reason(aReason) userInfo(aUserInfo);
