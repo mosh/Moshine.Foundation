@@ -10,7 +10,7 @@ uses
 
 type
 
-  {$IF TOFFEE}
+  {$IF COCOA}
   PlatformException = public NSException;
   {$ELSE}
   PlatformException = public System.Exception;
