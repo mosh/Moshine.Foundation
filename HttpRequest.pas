@@ -1,7 +1,7 @@
 ﻿namespace Moshine.Foundation.Web;
 
 uses
-  {$IF TOFFEE}
+  {$IF TOFFEE OR DARWIN}
   Foundation,
   {$ELSEIF ECHOES}
   System.Net.Http,
@@ -10,7 +10,7 @@ uses
 
 
 type
-  {$IF TOFFEE}
+  {$IF TOFFEE OR DARWIN}
   PlatformHttpRequest = public NSMutableURLRequest;
   {$ELSEIF ECHOES}
   PlatformHttpRequest = public HttpRequestMessage;
@@ -43,7 +43,7 @@ type
           raise new ArgumentException($'Invalid method {webMethod}');
       end;
     end;
-    {$ELSEIF TOFFEE}
+    {$ELSEIF TOFFEE OR DARWIN}
     constructor (webMethod:String; url:String);
     begin
       self := new NSMutableURLRequest() withURL( new NSURL() withString( url ));
@@ -72,7 +72,7 @@ type
 
     method AddHeader(name:String; value:String);
     begin
-      {$IF TOFFEE}
+      {$IF TOFFEE OR DARWIN}
       mapped.setValue(value) forHTTPHeaderField(name);
       {$ELSEIF ECHOES}
       mapped.Headers.Add(name,value);
@@ -85,7 +85,7 @@ type
 
     property HttpMethod:String write
       begin
-        {$IFDEF TOFFEE}
+        {$IFDEF TOFFEE OR DARWIN}
         mapped.setHTTPMethod(value);
         {$ELSEIF ECHOES}
         {$ELSE}
@@ -95,7 +95,7 @@ type
     property JsonBody : String write
       begin
 
-        {$IFDEF TOFFEE}
+        {$IFDEF TOFFEE OR DARWIN}
         mapped.setValue('application/json; charset=utf-8') forHTTPHeaderField('Content-Type');
         mapped.setValue('application/json') forHTTPHeaderField('Accept');
         mapped.setValue( $'{value.Length}' ) forHTTPHeaderField('Content-Length');

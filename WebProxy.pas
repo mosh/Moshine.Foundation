@@ -1,7 +1,7 @@
 ﻿namespace Moshine.Foundation.Web;
 
 uses
-  {$IF TOFFEE}
+  {$IF TOFFEE OR DARWIN}
   Foundation,
   {$ELSEIF ECHOES}
   Newtonsoft.Json,
@@ -26,7 +26,7 @@ type
 
     method WebRequestAs<T>(webMethod:String; url:String;addAuthentication:Boolean := true):T;
     begin
-      {$IFDEF TOFFEE}
+      {$IFDEF TOFFEE OR DARWIN}
       exit WebRequestAsObject(webMethod,url,addAuthentication) as T;
       {$ELSEIF ECHOES}
       exit JsonConvert.DeserializeObject<T>(WebRequestAsString(webMethod, url, nil,addAuthentication));
@@ -38,7 +38,7 @@ type
       exit WebRequestAsObject(webMethod, url, nil,addAuthentication);
     end;
 
-    {$IFDEF ISLAND}
+    {$IFDEF ISLAND AND NOT DARWIN}
     method WebRequestAsObject(webMethod:String; url:String; obj:Object; addAuthentication:Boolean := true):Object;
     begin
       raise new NotImplementedException('WebRequestAsObject not implemented on this platform');
@@ -46,7 +46,7 @@ type
     {$ENDIF}
 
 
-    {$IF TOFFEE}
+    {$IF TOFFEE OR DARWIN}
     method WebRequestAs<T>(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):T;
     begin
       var obj := WebRequestAsObject(webMethod, url, jsonBody,addAuthentication);
@@ -62,7 +62,7 @@ type
     end;
     {$ENDIF}
 
-    {$IF TOFFEE}
+    {$IF TOFFEE OR DARWIN}
 
     method WebRequestAsString(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):String;
     begin

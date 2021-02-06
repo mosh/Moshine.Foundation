@@ -1,7 +1,7 @@
 ﻿namespace Moshine.Foundation;
 
 
-{$IF TOFFEE}
+{$IF DARWIN OR TOFEE}
 uses
   Foundation;
 {$ELSE}
@@ -10,7 +10,7 @@ uses
 
 type
 
-  {$IF COCOA}
+  {$IF DARWIN OR TOFEE}
   MoshineFoundationException = public NSException;
   {$ELSE}
   MoshineFoundationException = public System.Exception;
@@ -21,7 +21,7 @@ type
   public
     property Url:String;
 
-    {$IF COCOA}
+    {$IF DARWIN OR TOFEE}
     constructor withName(aName: NSExceptionName) reason(aReason: nullable NSString) userInfo(aUserInfo: nullable NSDictionary);
     begin
       inherited constructor withName(aName) reason(aReason) userInfo(aUserInfo);
@@ -44,7 +44,7 @@ type
     property StatusCode:Integer;
 
 
-    {$IF COCOA}
+    {$IF DARWIN OR TOFEE}
     constructor withName(aName: NSExceptionName) reason(aReason: nullable NSString) userInfo(aUserInfo: nullable NSDictionary) StatusCode(aCode:Integer) FromUrl(aUrl:NSString);
     begin
       inherited constructor withName(aName) reason(aReason) userInfo(aUserInfo);
