@@ -90,7 +90,7 @@ type
       end;
 
       var errorReason:NSString := nil;
-      var httpStatusCode:NSInteger := 0;
+      var httpStatusCode := 200;
 
       var outerExecutionBlock: NSBlockOperation := NSBlockOperation.blockOperationWithBlock(method() begin
 
@@ -111,11 +111,11 @@ type
 
                 httpStatusCode := httpResponse.statusCode;
 
-                NSLog('UrlResponse Method %@ Url %@ Response %ld',webMethod,url,httpStatusCode);
+                NSLog('UrlResponse Method %@ Url %@ Response %d',webMethod,url,httpStatusCode);
 
                 if(httpStatusCode <> 200)then
                 begin
-                  errorReason := NSString.stringWithFormat('Url  %@ returned Invalid Status Code %ld', url, httpStatusCode);
+                  errorReason := NSString.stringWithFormat('Url  %@ returned Invalid Status Code %d', url, httpStatusCode);
                 end;
 
               end;
