@@ -17,5 +17,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)IntegerExtensions.pas" />
     <Compile Include="$(MSBuildThisFileDirectory)ApplicationHelpers.pas" />
     <Compile Include="$(MSBuildThisFileDirectory)DoubleExtensions.pas" />
+    <Compile Include="$(MSBuildThisFileDirectory)EnvironmentExtensions.pas" />
   </ItemGroup>
 </Project>
