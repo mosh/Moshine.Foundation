@@ -1,5 +1,8 @@
 ﻿namespace Moshine.Foundation.Shared;
 
+uses
+  RemObjects.Elements.RTL;
+
 type
   EnvironmentExtensions = public extension class(RemObjects.Elements.RTL.Environment)
   private
@@ -9,10 +12,10 @@ type
     begin
       {$IFDEF ECHOES}
       exit System.Environment.GetCommandLineArgs;
-      {$ELSEIF TOFFEE OR DARWIN}
-      exit Foundation.NSProcessInfo.processInfo.arguments;
+      {$ELSEIF TOFFEE}
+      exit Foundation.NSProcessInfo.processInfo.arguments.ToArray;
       {$ELSE}
-      raise NotImplementedException;
+      raise new NotImplementedException;
       {$ENDIF}
 
     end;
