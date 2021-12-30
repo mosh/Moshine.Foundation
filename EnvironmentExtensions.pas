@@ -1,6 +1,7 @@
 ﻿namespace Moshine.Foundation.Shared;
 
 uses
+  RemObjects.Elements.System,
   RemObjects.Elements.RTL;
 
 type
@@ -10,10 +11,13 @@ type
   public
     class method CommandLineArgs:array of String;
     begin
+
       {$IFDEF ECHOES}
       exit System.Environment.GetCommandLineArgs;
       {$ELSEIF TOFFEE}
       exit Foundation.NSProcessInfo.processInfo.arguments.ToArray;
+      {$ELSEIF DARWIN}
+      exit Foundation.NSProcessInfo.processInfo.arguments.Cast<System.String>.ToArray;
       {$ELSE}
       raise new NotImplementedException;
       {$ENDIF}
