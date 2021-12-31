@@ -1,6 +1,6 @@
 ﻿namespace Moshine.Foundation;
 
-{$IF TOFFEE OR ISLAND}
+{$IF TOFFEE OR DARWIN}
 
 uses
   Foundation,
