@@ -104,6 +104,17 @@
   <ItemGroup Condition="'$(Target)' == 'Island.Darwin.iOS'">
     <Reference Include="SystemConfiguration" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EnvironmentExtensions.pas" />
+    <Compile Include="WebProxy.pas" />
+    <Compile Include="Exceptions.pas" />
+    <Compile Include="HttpRequest.pas" />
+    <Compile Include="ReachAbility.pas" />
+    <Compile Include="DateTimeExtensions.pas" />
+    <Compile Include="DoubleExtensions.pas" />
+    <Compile Include="IntegerExtensions.pas" />
+    <Compile Include="ApplicationHelpers.pas" />
+    <Compile Include="NSDateExtensions.pas" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.targets" />
-  <Import Project="Moshine.Foundation.Shared.projitems" Label="Shared" />
 </Project>

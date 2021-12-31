@@ -1,11 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # RemObjects Fire
-Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "DynMoshine.Foundation", "DynMoshine.Foundation.elements", "{30020CD8-5418-46FA-9CC5-55CAC0FBD933}"
-EndProject
 Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation", "Moshine.Foundation.elements", "{19E42704-1AC8-4D61-B2C5-FF63E951602F}"
-EndProject
-Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation.Shared", "Moshine.Foundation.Shared.elements", "{285F1F89-A475-4B02-B1D2-5DDD0E228100}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,10 +9,6 @@ Global
 		Release|AnyCPU = Release|AnyCPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{30020CD8-5418-46FA-9CC5-55CAC0FBD933}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
-		{30020CD8-5418-46FA-9CC5-55CAC0FBD933}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
-		{30020CD8-5418-46FA-9CC5-55CAC0FBD933}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
-		{30020CD8-5418-46FA-9CC5-55CAC0FBD933}.Release|AnyCPU.Build.0 = Release|AnyCPU
 		{19E42704-1AC8-4D61-B2C5-FF63E951602F}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
 		{19E42704-1AC8-4D61-B2C5-FF63E951602F}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
 		{19E42704-1AC8-4D61-B2C5-FF63E951602F}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
