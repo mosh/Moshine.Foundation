@@ -119,6 +119,7 @@
     <Compile Include="IntegerExtensions.pas" />
     <Compile Include="ApplicationHelpers.pas" />
     <Compile Include="NSDateExtensions.pas" />
+    <Compile Include="DictionaryExtensions.pas" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.targets" />
 </Project>
