@@ -62,7 +62,7 @@ type
       end;
       exit outValue;
       {$ELSE}
-      exit RemObjects.Elements.RTL.DateTime.ParseISO8601DateTime(value);
+      exit RemObjects.Elements.RTL.DateTime.TryParseISO8601(value);
       {$ENDIF}
 
     end;
