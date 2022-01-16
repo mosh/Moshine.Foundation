@@ -66,7 +66,6 @@ type
 
     method WebRequestAsString(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):String;
     begin
-      NSLog('WebRequest Method %@ Url %@',webMethod,url);
 
       var stringResponse:String := nil;
 
@@ -103,15 +102,12 @@ type
 
             if(not assigned(error))then
             begin
-              NSLog('WebRequest Method %@ Url %@ returned Response',webMethod,url);
 
               if(response is NSHTTPURLResponse)then
               begin
                 var httpResponse := response as NSHTTPURLResponse;
 
                 httpStatusCode := httpResponse.statusCode;
-
-                NSLog('UrlResponse Method %@ Url %@ Response %d',webMethod,url,httpStatusCode);
 
                 if(httpStatusCode <> 200)then
                 begin
