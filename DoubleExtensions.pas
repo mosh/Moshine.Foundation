@@ -2,7 +2,7 @@
 
 type
 
-  DoubleExtensions = public extension class(Double)
+  FoundationDoubleExtensions = public extension class(Double)
   private
   protected
   public
