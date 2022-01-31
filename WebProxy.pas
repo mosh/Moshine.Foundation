@@ -64,29 +64,9 @@ type
 
     {$IF TOFFEE OR DARWIN}
 
-    method WebRequestAsString(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):String;
+    method WebRequestAsString(request:HttpRequest):String;
     begin
-
       var stringResponse:String := nil;
-
-      var request:HttpRequest;
-
-      if(assigned(_requestBuilder))then
-      begin
-        request := _requestBuilder(url,webMethod,addAuthentication);
-      end
-      else
-      begin
-        request := new HttpRequest(webMethod, url);
-        request.HttpMethod := webMethod;
-      end;
-
-
-      if(assigned(jsonBody))then
-      begin
-        var stringForData := new NSString withData(jsonBody) encoding(NSStringEncoding.NSUTF8StringEncoding);
-        request.JsonBody := stringForData;
-      end;
 
       var errorReason:NSString := nil;
       var httpStatusCode := 200;
@@ -111,7 +91,9 @@ type
 
                 if(httpStatusCode <> 200)then
                 begin
-                  errorReason := NSString.stringWithFormat('Url  %@ returned Invalid Status Code %d', url, httpStatusCode);
+
+
+                  errorReason := NSString.stringWithFormat('Url  %@ returned Invalid Status Code %d', request.Url, httpStatusCode);
                 end;
 
               end;
@@ -125,12 +107,12 @@ type
             begin
               case error.domain of
                 NSURLErrorDomain:
-                  begin
+                begin
                     case error.code of
                       NSURLErrorCannotConnectToHost:
-                        httpStatusCode := 503;
+                      httpStatusCode := 503;
                     end;
-                  end;
+                end;
               end;
               errorReason := error.localizedDescription;
             end;
@@ -138,11 +120,11 @@ type
             dispatch_semaphore_signal(semaphore);
           end);
 
-          task.resume;
+        task.resume;
 
-          dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 
-        end);
+      end);
 
       var workerQueue := new NSOperationQueue;
       workerQueue.addOperations([outerExecutionBlock]) waitUntilFinished(true);
@@ -150,19 +132,21 @@ type
       if(not String.IsNullOrEmpty(errorReason))then
       begin
 
+        var url := request.Url;
+
         case httpStatusCode of
           UnknownHttpStatusCode :
-            begin
+          begin
               raise new ProxyException withName('ProxyException') reason(errorReason) userInfo(nil) FromUrl(url);
-            end;
+          end;
           401:
-            begin
+          begin
               raise new AuthenticationRequiredException withName('AuthenticationRequired') reason('authentication required from 401 statusCode') userInfo(nil) FromUrl(url);
-            end;
+          end;
           503:
-            begin
+          begin
               raise new HttpStatusCodeException withName('ProxyException') reason('Service Unavailable') userInfo(nil) FromUrl(url);
-            end;
+          end;
           else
             begin
               raise new HttpStatusCodeException withName('ProxyException') reason(errorReason) userinfo(nil) StatusCode(httpStatusCode) FromUrl(url);
@@ -171,7 +155,32 @@ type
 
       end;
 
-      exit stringResponse;
+    end;
+
+    method WebRequestAsString(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):String;
+    begin
+
+      var request:HttpRequest;
+
+      if(assigned(_requestBuilder))then
+      begin
+        request := _requestBuilder(url,webMethod,addAuthentication);
+      end
+      else
+      begin
+        request := new HttpRequest(webMethod, url);
+        request.HttpMethod := webMethod;
+      end;
+
+
+      if(assigned(jsonBody))then
+      begin
+        var stringForData := new NSString withData(jsonBody) encoding(NSStringEncoding.NSUTF8StringEncoding);
+        request.JsonBody := stringForData;
+      end;
+
+
+      exit WebRequestAsString(request);
 
     end;
 
@@ -200,6 +209,7 @@ type
       exit nil;
 
     end;
+
     {$ELSEIF ECHOES}
 
 

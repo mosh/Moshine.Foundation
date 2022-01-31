@@ -92,6 +92,14 @@ type
         {$ENDIF}
       end;
 
+    property Url:String read
+      begin
+        {$IFDEF TOFFEE OR DARWIN}
+        exit mapped.URL.path;
+        {$ENDIF}
+
+      end;
+
     property JsonBody : String write
       begin
 
