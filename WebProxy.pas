@@ -262,6 +262,21 @@ type
 
     {$ELSE}
 
+    method WebRequestAsString(request:HttpRequest):String;
+    begin
+
+      var response := Http.ExecuteRequestSynchronous(request);
+
+      if(response.Success)then
+      begin
+        exit response.GetContentAsStringSynchronous;
+      end;
+
+      raise new HttpStatusCodeException(response.Code);
+
+
+    end;
+
     method WebRequestAsString(webMethod:String; url:String; jsonBody:Object;addAuthentication:Boolean := true):String;
     begin
 
@@ -282,14 +297,7 @@ type
         raise new NotImplementedException('JsonBody not implemented on this platform.');
       end;
 
-      var response := Http.ExecuteRequestSynchronous(request);
-
-      if(response.Success)then
-      begin
-        exit response.GetContentAsStringSynchronous;
-      end;
-
-      raise new HttpStatusCodeException(response.Code);
+      exit WebRequestAsString(request);
 
     end;
 
