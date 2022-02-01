@@ -155,6 +155,8 @@ type
 
       end;
 
+      exit stringResponse;
+
     end;
 
     method WebRequestAsString(webMethod:String; url:String; jsonBody:NSData;addAuthentication:Boolean := true):String;
@@ -212,10 +214,24 @@ type
 
     {$ELSEIF ECHOES}
 
+    method WebRequestAsString(request:HttpRequest):String;
+    begin
+      var client := new HttpClient;
+
+      var response := client.SendAsync(request).Result;
+
+      if(response.IsSuccessStatusCode)then
+      begin
+        exit response.Content.ReadAsStringAsync.Result;
+      end;
+
+      raise new HttpStatusCodeException(Integer(response.StatusCode));
+
+    end;
+
 
     method WebRequestAsString(webMethod:String; url:String; jsonBody:Object;addAuthentication:Boolean := true):String;
     begin
-      var client := new HttpClient;
 
       var requestMessage:HttpRequestMessage;
 
@@ -235,14 +251,7 @@ type
         requestMessage.Content := content;
       end;
 
-      var response := client.SendAsync(requestMessage).Result;
-
-      if(response.IsSuccessStatusCode)then
-      begin
-        exit response.Content.ReadAsStringAsync.Result;
-      end;
-
-      raise new HttpStatusCodeException(Integer(response.StatusCode));
+      exit WebRequestAsString(requestMessage);
 
     end;
 
