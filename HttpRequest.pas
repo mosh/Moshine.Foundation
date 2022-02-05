@@ -6,12 +6,13 @@ uses
   {$ELSEIF ECHOES}
   System.Net.Http,
   {$ENDIF}
+  Moshine.Foundation,
   RemObjects.Elements.RTL;
 
 
 type
   {$IF TOFFEE OR DARWIN}
-  PlatformHttpRequest = public NSMutableURLRequest;
+  PlatformHttpRequest = public NSURLRequest;
   {$ELSEIF ECHOES}
   PlatformHttpRequest = public HttpRequestMessage;
   {$ELSE}
@@ -21,8 +22,6 @@ type
   HttpRequest = public class mapped to PlatformHttpRequest
 
   public
-
-
 
     {$IFDEF ECHOES}
 
@@ -73,7 +72,12 @@ type
     method AddHeader(name:String; value:String);
     begin
       {$IF TOFFEE OR DARWIN}
-      mapped.setValue(value) forHTTPHeaderField(name);
+      if( mapped is not NSMutableURLRequest)then
+      begin
+        raise new MoshineFoundationException('mapped is not a NSMutableException');
+      end;
+
+      NSMutableURLRequest(mapped).setValue(value) forHTTPHeaderField(name);
       {$ELSEIF ECHOES}
       mapped.Headers.Add(name,value);
       {$ELSE}
@@ -86,7 +90,12 @@ type
     property HttpMethod:String write
       begin
         {$IFDEF TOFFEE OR DARWIN}
-        mapped.setHTTPMethod(value);
+        if( mapped is not NSMutableURLRequest)then
+        begin
+          raise new MoshineFoundationException('mapped is not a NSMutableException');
+        end;
+
+        NSMutableURLRequest(mapped).setHTTPMethod(value);
         {$ELSEIF ECHOES}
         {$ELSE}
         {$ENDIF}
@@ -104,13 +113,18 @@ type
       begin
 
         {$IFDEF TOFFEE OR DARWIN}
-        mapped.setValue('application/json; charset=utf-8') forHTTPHeaderField('Content-Type');
-        mapped.setValue('application/json') forHTTPHeaderField('Accept');
-        mapped.setValue( $'{value.Length}' ) forHTTPHeaderField('Content-Length');
+        if( mapped is not NSMutableURLRequest)then
+        begin
+          raise new MoshineFoundationException('mapped is not a NSMutableException');
+        end;
+
+        NSMutableURLRequest(mapped).setValue('application/json; charset=utf-8') forHTTPHeaderField('Content-Type');
+        NSMutableURLRequest(mapped).setValue('application/json') forHTTPHeaderField('Accept');
+        NSMutableURLRequest(mapped).setValue( $'{value.Length}' ) forHTTPHeaderField('Content-Length');
 
         var data := NSString(value).dataUsingEncoding(NSStringEncoding.NSUTF8StringEncoding);
 
-        mapped.setHTTPBody(data);
+        NSMutableURLRequest(mapped).setHTTPBody(data);
 
         {$ELSEIF ECHOES}
         var content := new StringContent(value, Encoding.UTF8, 'application/json');
