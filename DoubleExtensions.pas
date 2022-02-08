@@ -7,7 +7,7 @@ type
   protected
   public
 
-    {$IF TOFFEE}
+    {$IF TOFFEE OR DARWIN}
     method epochToDate:Foundation.NSDate;
     begin
       exit Foundation.NSDate.dateWithTimeIntervalSince1970(self);

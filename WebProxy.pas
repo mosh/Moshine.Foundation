@@ -26,11 +26,14 @@ type
 
     method WebRequestAs<T>(webMethod:String; url:String;addAuthentication:Boolean := true):T;
     begin
-      {$IFDEF TOFFEE OR DARWIN}
-      exit WebRequestAsObject(webMethod,url,addAuthentication) as T;
-      {$ELSEIF ECHOES}
+      if defined('TOFFEE') or defined('DARWIN') then
+      begin
+        exit WebRequestAsObject(webMethod,url,addAuthentication) as T;
+      end
+      else if (defined('ECHOES')) then
+      begin
       exit JsonConvert.DeserializeObject<T>(WebRequestAsString(webMethod, url, nil,addAuthentication));
-      {$ENDIF}
+      end;
     end;
 
     method WebRequestAsObject(webMethod:String; url:String;addAuthentication:Boolean := true):Object;

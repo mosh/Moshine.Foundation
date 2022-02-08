@@ -1,6 +1,6 @@
 ﻿namespace Moshine.Foundation;
 
-{$IF TOFFEE}
+{$IF TOFFEE OR DARWIN}
 uses
   Foundation, RemObjects.Elements.RTL;
 
