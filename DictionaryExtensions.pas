@@ -1,5 +1,8 @@
 ﻿namespace Moshine.Foundation;
 
+uses
+  RemObjects.Elements.System;
+
 type
 
 {$IF ISLAND}

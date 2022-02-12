@@ -43,9 +43,9 @@ type
       end;
     end;
     {$ELSEIF TOFFEE OR DARWIN}
-    constructor (webMethod:String; url:String);
+    constructor (webMethod:String; urlValue:String);
     begin
-      self := new NSMutableURLRequest() withURL( new NSURL() withString( url ));
+      self := new NSMutableURLRequest() withURL( new NSURL() withString( urlValue ));
       self.setHttpMethod(webMethod);
     end;
 
