@@ -43,11 +43,13 @@
     <SupportMacCatalyst>False</SupportMacCatalyst>
     <GenerateBitcode>True</GenerateBitcode>
     <Architecture>all</Architecture>
+    <DefaultObjectModel>Cocoa</DefaultObjectModel>    
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Target)' == 'Island.Darwin.tvOS' ">
     <Mode>Island</Mode>
     <SubMode>Darwin</SubMode>
     <SDK>tvOS</SDK>
+    <DefaultObjectModel>Cocoa</DefaultObjectModel>    
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Target)' == 'Island.Darwin.watchOS' ">
     <Mode>Island</Mode>
@@ -56,6 +58,7 @@
     <GenerateBitcode>True</GenerateBitcode>
     <Architecture>all</Architecture>
     <SimulatorArchitecture>all</SimulatorArchitecture>
+    <DefaultObjectModel>Cocoa</DefaultObjectModel>    
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Target)' == 'Island.Linux' ">
     <Mode>Island</Mode>
