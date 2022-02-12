@@ -3,7 +3,7 @@
 {$IFDEF ECHOES}
 uses
   System;
-{$ELSEIF TOFFEE}
+{$ELSEIF TOFFEE OR DARWIN}
 uses
   Foundation;
 {$ENDIF}
@@ -19,7 +19,7 @@ type
   const DefaultDateTimeFormat:String = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
   {$ENDIF}
 
-  {$IF TOFFEE}
+  {$IF TOFFEE OR DARWIN}
 
   class property FormatterForParsing1 : NSISO8601DateFormatter read
     begin
@@ -54,7 +54,7 @@ type
     begin
       {$IFDEF ECHOES}
       exit System.DateTime.ParseExact(value, DefaultDateTimeFormat,nil);
-      {$ELSEIF TOFFEE}
+      {$ELSEIF TOFFEE OR DARWIN}
       var outValue := FormatterForParsing1.dateFromString(value);
       if(not assigned(outValue))then
       begin
