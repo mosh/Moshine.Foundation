@@ -100,6 +100,16 @@ type
       {$ENDIF}
     end;
 
+    method FirstOfMonth:RemObjects.Elements.RTL.DateTime;
+    begin
+      exit new RemObjects.Elements.RTL.DateTime(self.Year, self.Month,1);
+    end;
+
+    method FirstOfYear:RemObjects.Elements.RTL.DateTime;
+    begin
+      exit new RemObjects.Elements.RTL.DateTime(self.Year, 1,1);
+    end;
+
 
   end;
 

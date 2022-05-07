@@ -13,6 +13,7 @@ uses
 type
   {$IF TOFFEE OR DARWIN}
   PlatformHttpRequest = public NSURLRequest;
+  PlatformMutableHttpRequest = public NSMutableURLRequest;
   {$ELSEIF ECHOES}
   PlatformHttpRequest = public HttpRequestMessage;
   {$ELSE}
