@@ -1,5 +1,9 @@
 ﻿namespace Moshine.Foundation.Shared;
 
+{$IF TOFFEE OR DARWIN}
+uses
+  Foundation;
+{$ENDIF}
 type
 
   FoundationDoubleExtensions = public extension class(Double)
@@ -12,6 +16,15 @@ type
     begin
       exit Foundation.NSDate.dateWithTimeIntervalSince1970(self);
     end;
+
+    method ToString(precision:Integer := 2):String;
+    begin
+      var formatter := new NSNumberFormatter;
+      formatter.minimumFractionDigits := precision;
+      formatter.maximumFractionDigits := precision;
+      exit formatter.stringFromNumber(self);
+    end;
+
     {$ENDIF}
 
   end;
