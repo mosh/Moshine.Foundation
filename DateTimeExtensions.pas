@@ -100,6 +100,18 @@ type
       {$ENDIF}
     end;
 
+    method TimeSinceEpoch:Double;
+    begin
+      {$IF ECHOES}
+      raise new NotImplementedException;
+      {$ELSEIF TOFFEE}
+      raise new RemObjects.Elements.RTL.NotImplementedException
+      {$ELSE}
+      var span := self.TimeSince(new RemObjects.Elements.RTL.DateTime(1970,1,1));
+      exit Math.Round(span.TotalSeconds);
+      {$ENDIF}
+    end;
+
     method FirstOfMonth:RemObjects.Elements.RTL.DateTime;
     begin
       exit new RemObjects.Elements.RTL.DateTime(self.Year, self.Month,1);
