@@ -87,7 +87,7 @@ type
       {$ENDIF}
     end;
 
-    class method TimeSinceEpoch:Double;
+    class method TimeSinceEpochNow:Double;
     begin
       {$IF ECHOES}
       exit DateTimeOffset.Now.ToUnixTimeSeconds;
