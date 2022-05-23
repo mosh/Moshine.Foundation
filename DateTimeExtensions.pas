@@ -96,20 +96,14 @@ type
       exit date.timeIntervalSince1970;
       {$ELSE}
       var span := RemObjects.Elements.Rtl.DateTime.TimeSince(new RemObjects.Elements.RTL.DateTime(1970,1,1));
-      exit Math.Round(span.TotalSeconds);
+      exit span.TotalSeconds;
       {$ENDIF}
     end;
 
     method TimeSinceEpoch:Double;
     begin
-      {$IF ECHOES}
-      raise new NotImplementedException;
-      {$ELSEIF TOFFEE}
-      raise new RemObjects.Elements.RTL.NotImplementedException
-      {$ELSE}
-      var span := self.TimeSince(new RemObjects.Elements.RTL.DateTime(1970,1,1));
-      exit Math.Round(span.TotalSeconds);
-      {$ENDIF}
+      var span := self - new RemObjects.Elements.RTL.DateTime(1970,1,1);
+      exit span.TotalSeconds;
     end;
 
     method FirstOfMonth:RemObjects.Elements.RTL.DateTime;
