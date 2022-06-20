@@ -116,6 +116,12 @@ type
       exit new RemObjects.Elements.RTL.DateTime(self.Year, 1,1);
     end;
 
+    // DateTime.UTCNow gives UTC, this converts to local time
+    method Local:RemObjects.Elements.RTL.DateTime;
+    begin
+      exit self.Add(RemObjects.Elements.RTL.TimeZone.Local.OffsetToUTC);
+    end;
+
 
   end;
 
