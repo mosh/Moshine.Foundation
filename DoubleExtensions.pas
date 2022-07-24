@@ -1,4 +1,4 @@
-﻿namespace Moshine.Foundation.Shared;
+﻿namespace Moshine.Foundation;
 
 {$IF TOFFEE OR DARWIN}
 uses
