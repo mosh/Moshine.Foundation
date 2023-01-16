@@ -24,7 +24,6 @@ type
       formatter.maximumFractionDigits := precision;
       exit formatter.stringFromNumber(self);
     end;
-
     {$ENDIF}
 
   end;
