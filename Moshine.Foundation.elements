@@ -16,6 +16,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <OutputPath>.\Bin\Release</OutputPath>
+    <CreateNuGetPackage>True</CreateNuGetPackage>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Target)' == 'Echoes.Core' ">
     <Mode>Echoes</Mode>
@@ -127,6 +128,7 @@
     <Compile Include="DictionaryExtensions.pas" />
     <Compile Include="LocalDateTimeExtensions.pas" />
     <Compile Include="ProductVersion.pas" />
+    <Compile Include="DateTimeOffsetExtensions.pas" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.targets" />
 </Project>
