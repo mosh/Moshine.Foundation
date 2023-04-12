@@ -95,7 +95,6 @@
     <SimulatorArchitecture>all</SimulatorArchitecture>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="#" />
     <Reference Include="Elements">
       <Private>True</Private>
     </Reference>
@@ -103,6 +102,11 @@
   <ItemGroup Condition="'$(Target)' == 'Echoes.Core'">
     <NuGetReference Include="Newtonsoft.Json:[12.0.1]" />
     <NuGetReference Include="NodaTime:[3.1.6]" />
+    <ProjectReference Include="Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements">
+      <Project>{D158CF2E-629D-4FAE-B978-8D93E435C07A}</Project>
+      <ProjectFile>Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements</ProjectFile>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup Condition="'$(Target)' == 'Echoes.Standard'">
     <NuGetReference Include="Newtonsoft.Json:[12.0.1]" />
