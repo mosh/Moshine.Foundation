@@ -133,6 +133,7 @@
     <Compile Include="LocalDateTimeExtensions.pas" />
     <Compile Include="ProductVersion.pas" />
     <Compile Include="DateTimeOffsetExtensions.pas" />
+    <Compile Include="AssemblyInfo.pas" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.targets" />
 </Project>

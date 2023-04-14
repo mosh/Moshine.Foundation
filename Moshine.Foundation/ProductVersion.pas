@@ -13,14 +13,6 @@ uses
 [assembly: AssemblyCompany('Moshine')]
 [assembly: AssemblyProduct('Moshine Foundation')]
 
-[assembly: AssemblyTitle('')]
-[assembly: AssemblyDescription('')]
-[assembly: AssemblyConfiguration('')]
-[assembly: AssemblyTrademark('')]
-[assembly: AssemblyCulture('')]
-[assembly: NeutralResourcesLanguage('')]
-[assembly: ComVisible(false)]
-
 {$ENDIF}
 
 end.

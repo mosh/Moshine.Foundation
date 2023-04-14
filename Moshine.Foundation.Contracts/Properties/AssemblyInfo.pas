@@ -7,17 +7,9 @@ uses
   System.Resources,
   System.Runtime.InteropServices;
 
+
 [assembly: AssemblyTitle('')]
 [assembly: AssemblyDescription('')]
-[assembly: AssemblyConfiguration('')]
-[assembly: AssemblyCompany('')]
-[assembly: AssemblyProduct('')]
-[assembly: AssemblyCopyright('')]
-[assembly: AssemblyTrademark('')]
-[assembly: AssemblyCulture('')]
-[assembly: AssemblyVersion('1.0.0.1')]
-[assembly: NeutralResourcesLanguage('')]
-[assembly: ComVisible(false)]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the
