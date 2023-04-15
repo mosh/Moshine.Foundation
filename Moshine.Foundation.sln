@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # RemObjects Fire
 Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation", "Moshine.Foundation\Moshine.Foundation.elements", "{19E42704-1AC8-4D61-B2C5-FF63E951602F}"
 EndProject
+Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation.AWS", "Moshine.Foundation.AWS\Moshine.Foundation.AWS.elements", "{EF85F273-C62A-4B33-8A7F-11F69045A9EB}"
+EndProject
 Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation.Contracts", "Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements", "{D158CF2E-629D-4FAE-B978-8D93E435C07A}"
 EndProject
 Global
@@ -15,6 +17,10 @@ Global
 		{19E42704-1AC8-4D61-B2C5-FF63E951602F}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
 		{19E42704-1AC8-4D61-B2C5-FF63E951602F}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
 		{19E42704-1AC8-4D61-B2C5-FF63E951602F}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{EF85F273-C62A-4B33-8A7F-11F69045A9EB}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{EF85F273-C62A-4B33-8A7F-11F69045A9EB}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{EF85F273-C62A-4B33-8A7F-11F69045A9EB}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{EF85F273-C62A-4B33-8A7F-11F69045A9EB}.Release|AnyCPU.Build.0 = Release|AnyCPU
 		{D158CF2E-629D-4FAE-B978-8D93E435C07A}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
 		{D158CF2E-629D-4FAE-B978-8D93E435C07A}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
 		{D158CF2E-629D-4FAE-B978-8D93E435C07A}.Release|AnyCPU.ActiveCfg = Release|AnyCPU

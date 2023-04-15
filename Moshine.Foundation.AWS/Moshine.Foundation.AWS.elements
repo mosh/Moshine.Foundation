@@ -2,10 +2,10 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <ProductVersion>3.5</ProductVersion>
-    <RootNamespace>Moshine.Foundation.Contracts</RootNamespace>
-    <ProjectGuid>{D158CF2E-629D-4FAE-B978-8D93E435C07A}</ProjectGuid>
+    <RootNamespace>Moshine.Foundation.AWS</RootNamespace>
+    <ProjectGuid>{EF85F273-C62A-4B33-8A7F-11F69045A9EB}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Moshine.Foundation.Contracts</AssemblyName>
+    <AssemblyName>Moshine.Foundation.AWS</AssemblyName>
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
     <TargetFramework>.NET6.0</TargetFramework>
     <Mode>Echoes</Mode>
@@ -29,12 +29,27 @@
     <Reference Include="Echoes">
       <Private>True</Private>
     </Reference>
+    <ProjectReference Include="..\..\Moshine.Foundation\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements">
+      <HintPath>..\..\Moshine.Foundation\Moshine.Foundation.Contracts\Bin\Release\Moshine.Foundation.Contracts.dll</HintPath>
+      <Project>{D158CF2E-629D-4FAE-B978-8D93E435C07A}</Project>
+      <ProjectFile>..\..\Moshine.Foundation\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements</ProjectFile>
+      <Private>True</Private>
+    </ProjectReference>
+    <NuGetReference Include="Npgsql:[7.0.2]">
+      <Private>True</Private>
+    </NuGetReference>
+    <NuGetReference Include="AWSSDK.Core:[3.7.106.6]">
+      <Private>True</Private>
+    </NuGetReference>
+    <NuGetReference Include="AWSSDK.RDS:[3.7.115]">
+      <Private>True</Private>
+    </NuGetReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.pas" />
-    <Compile Include="IConnectionBuilder.pas" />
-    <Compile Include="..\Moshine.Foundation\ProductVersion.pas" />
-    <Compile Include="Models\DatabaseConfig.pas" />
+    <Compile Include="AWSTokenGenerator.pas" />
+    <Compile Include="DatabaseConfig.pas" />
+    <Compile Include="RDSPostgresLocalBuilder.pas" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.Echoes.targets" />
 </Project>
