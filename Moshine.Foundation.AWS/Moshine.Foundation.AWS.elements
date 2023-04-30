@@ -24,11 +24,9 @@
     <OutputPath>.\Bin\Release</OutputPath>
     <CpuType>anycpu</CpuType>
     <EnableUnmanagedDebugging>False</EnableUnmanagedDebugging>
+    <CreateNuGetPackage>True</CreateNuGetPackage>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Echoes">
-      <Private>True</Private>
-    </Reference>
     <ProjectReference Include="..\..\Moshine.Foundation\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements">
       <HintPath>..\..\Moshine.Foundation\Moshine.Foundation.Contracts\Bin\Release\Moshine.Foundation.Contracts.dll</HintPath>
       <Project>{D158CF2E-629D-4FAE-B978-8D93E435C07A}</Project>
@@ -44,12 +42,34 @@
     <NuGetReference Include="AWSSDK.RDS:[3.7.115]">
       <Private>True</Private>
     </NuGetReference>
+    <NuGetReference Include="AWSSDK.SecretsManager:[3.7.102.29]">
+      <Private>True</Private>
+    </NuGetReference>
+    <NuGetReference Include="Newtonsoft.Json:[13.0.3]">
+      <Private>True</Private>
+    </NuGetReference>
+    <NuGetReference Include="AWSSDK.SecretsManager.Caching:[1.0.5]">
+      <Private>True</Private>
+    </NuGetReference>
+    <NuGetReference Include="Microsoft.Extensions.Logging:[6.0.0]">
+      <Private>True</Private>
+    </NuGetReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.pas" />
     <Compile Include="AWSTokenGenerator.pas" />
     <Compile Include="DatabaseConfig.pas" />
-    <Compile Include="RDSPostgresLocalBuilder.pas" />
+    <Compile Include="RDSPostgresBuilder.pas" />
+    <Compile Include="LambdaEnvironment.pas" />
+    <Compile Include="AWSEnvironmentVariables.pas" />
+    <Compile Include="Models\AWSSecurityAccess.pas" />
+    <Compile Include="ProfileCredentialsFactory.pas" />
+    <Compile Include="LamdaCredentialsFactory.pas" />
+    <Compile Include="Interfaces\IAWSCredentialsFactory.pas" />
+    <Compile Include="Interfaces\IPostgresDatabaseConfig.pas" />
+    <Compile Include="AWSSecrets.pas" />
+    <Compile Include="AWSCachedSecrets.pas" />
+    <Compile Include="Interfaces\IAWSSecrets.pas" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.Echoes.targets" />
 </Project>

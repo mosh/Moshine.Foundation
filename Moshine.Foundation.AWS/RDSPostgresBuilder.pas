@@ -4,10 +4,13 @@ uses
   Amazon,
   Amazon.RDS.Util,
   Amazon.Runtime.CredentialManagement,
-  Moshine.Foundation, Npgsql;
+  Moshine.Foundation,
+  Moshine.Foundation.AWS.Interfaces,
+  Npgsql;
 
 type
-  RDSPostgresLocalBuilder = public class(IConnectionBuilder)
+
+  RDSPostgresBuilder = public class(IConnectionBuilder)
   private
     property generator:IAWSTokenGenerator;
     property databaseConfig:IPostgresDatabaseConfig;
@@ -38,6 +41,11 @@ type
       exit new NpgsqlConnection(builder.ToString)
 
     end;
+
+    property IsPostgres:Boolean read
+      begin
+        exit true;
+      end;
 
   end;
 end.

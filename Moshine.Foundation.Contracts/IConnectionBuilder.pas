@@ -8,6 +8,7 @@ uses
 type
   IConnectionBuilder = public interface
     method Build:DbConnection;
+    property IsPostgres:Boolean read;
   end;
 
 {$ENDIF}

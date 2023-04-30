@@ -2,7 +2,7 @@
 
 uses
   Amazon,
-  Amazon.RDS.Util, Amazon.Runtime;
+  Amazon.RDS.Util, Amazon.Runtime, Moshine.Foundation.AWS.Interfaces;
 
 type
 
@@ -14,19 +14,19 @@ type
   AWSTokenGenerator = public class(IAWSTokenGenerator)
 
   private
-    property credentials:AWSCredentials;
+    property factory:IAWSCredentialsFactory;
     property region:RegionEndpoint;
   public
 
-    constructor(credentials:AWSCredentials; region:RegionEndpoint);
+    constructor(factory:IAWSCredentialsFactory; region:RegionEndpoint);
     begin
       self.region := region;
-      self.credentials := credentials;
+      self.factory := factory;
     end;
 
     method Generate(hostname:String; port:Integer;username:String):String;
     begin
-      exit RDSAuthTokenGenerator.GenerateAuthToken(credentials, region,hostname, port, username);
+      exit RDSAuthTokenGenerator.GenerateAuthToken(factory.Get, region,hostname, port, username);
     end;
 
   end;
