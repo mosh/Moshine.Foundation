@@ -27,7 +27,7 @@ type
       if(not assigned(credentials))then
       begin
 
-        logger.LogTrace('Getting credentials');
+        logger.LogInformation('Getting credentials');
 
         var sharedFile := new SharedCredentialsFile;
 

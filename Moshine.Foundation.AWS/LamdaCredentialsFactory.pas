@@ -20,8 +20,7 @@ type
     begin
       if(not assigned(credentials))then
       begin
-        credentials := new SessionAWSCredentials(environment.Access.AccessKeyId,
-                                                 environment.Access.SecretAccessKey,environment.Access.SessionToken)
+        credentials := new SessionAWSCredentials(environment.Access.AccessKeyId, environment.Access.SecretAccessKey,environment.Access.SessionToken)
       end;
       exit credentials;
     end;

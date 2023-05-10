@@ -3,11 +3,11 @@
 {$IF ECHOES}
 
 uses
-  System.Data.Common;
+  System.Data.Common, System.Threading;
 
 type
   IConnectionBuilder = public interface
-    method Build:DbConnection;
+    method BuildAsync(cancellationToken:CancellationToken := default):Task<DbConnection>;
     property IsPostgres:Boolean read;
   end;
 

@@ -6,37 +6,40 @@ uses
   Amazon.Runtime.CredentialManagement,
   Moshine.Foundation,
   Moshine.Foundation.AWS.Interfaces,
-  Npgsql;
+  Npgsql, System.Data.Common, System.Threading;
 
 type
 
   RDSPostgresBuilder = public class(IConnectionBuilder)
   private
-    property generator:IAWSTokenGenerator;
-    property databaseConfig:IPostgresDatabaseConfig;
+    property Generator:IAWSTokenGenerator;
+    property ConfigBuilder:IPostgresConfigBuilder;
   public
 
-    constructor(generator:IAWSTokenGenerator; databaseConfig:IPostgresDatabaseConfig);
+    constructor(generatorImpl:IAWSTokenGenerator; configBuilderImpl:IPostgresConfigBuilder);
     begin
-      self.generator := generator;
-      self.databaseConfig := databaseConfig;
+      Generator := generatorImpl;
+      ConfigBuilder := configBuilderImpl;
     end;
 
-    method Build: System.Data.Common.DbConnection;
+    method BuildAsync(cancellationToken:CancellationToken := default): Task<DbConnection>;
     begin
 
-      var token := generator.Generate(databaseConfig.Host, databaseConfig.Port, databaseConfig.Username);
+
+      var config := await ConfigBuilder.GetConfigAsync(cancellationToken);
+
+      var token := Generator.Generate(config.Host, config.Port, config.Username);
 
       var builder := new NpgsqlConnectionStringBuilder;
 
-      builder.Host := databaseConfig.Host;
-      builder.Username := databaseConfig.Username;
+      builder.Host := config.Host;
+      builder.Username := config.Username;
       builder.Password := token;
-      builder.Database := databaseConfig.Database;
-      builder.SearchPath := databaseConfig.SearchPath;
+      builder.Database := config.Database;
+      builder.SearchPath := config.SearchPath;
       builder.SslMode := SslMode.Require;
       builder.TrustServerCertificate := true;
-      builder.Port := databaseConfig.Port;
+      builder.Port := config.Port;
 
       exit new NpgsqlConnection(builder.ToString)
 

@@ -6,11 +6,8 @@ uses
 
 type
 
-  PostgresDatabaseConfig = public class(IPostgresDatabaseConfig)
+  PostgresDatabaseConfig = public class(DatabaseConfig)
   public
-    property Host:String;
-    property Port:Integer;
-    property Username:String;
     property Database:String;
     property SearchPath:String;
   end;

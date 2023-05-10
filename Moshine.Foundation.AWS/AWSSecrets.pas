@@ -5,7 +5,10 @@ uses
   Amazon.SecretsManager,
   Amazon.SecretsManager.Model,
   Moshine.Foundation.AWS.Interfaces,
-  Newtonsoft.Json, System.Dynamic, System.Net;
+  Newtonsoft.Json,
+  System.Dynamic,
+  System.Net,
+  System.Threading;
 
 type
 
@@ -23,14 +26,14 @@ type
       self.factory := factory;
     end;
 
-    method GetSecretAsync(secretName:String):Task<IDictionary<String,Object>>;
+    method GetSecretAsync(secretName:String; cancellationToken:CancellationToken := default):Task<IDictionary<String,Object>>;
     begin
 
       var client := new AmazonSecretsManagerClient(factory.Get, region);
 
       var request := new GetSecretValueRequest(SecretId := secretName, VersionStage := 'AWSCURRENT');
 
-      var response := await client.GetSecretValueAsync(request).ConfigureAwait(false);
+      var response := await client.GetSecretValueAsync(request, cancellationToken).ConfigureAwait(false);
 
       if response.HttpStatusCode <> HttpStatusCode.OK then
       begin

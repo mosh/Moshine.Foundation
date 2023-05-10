@@ -48,12 +48,13 @@
     <NuGetReference Include="Newtonsoft.Json:[13.0.3]">
       <Private>True</Private>
     </NuGetReference>
-    <NuGetReference Include="AWSSDK.SecretsManager.Caching:[1.0.5]">
-      <Private>True</Private>
-    </NuGetReference>
     <NuGetReference Include="Microsoft.Extensions.Logging:[6.0.0]">
       <Private>True</Private>
     </NuGetReference>
+    <Reference Include="Amazon.SecretsManager.Extensions.Caching">
+      <HintPath>..\..\aws-secretsmanager-caching-net\src\Amazon.SecretsManager.Extensions.Caching\bin\Debug\netstandard2.0\Amazon.SecretsManager.Extensions.Caching.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.pas" />
@@ -66,10 +67,10 @@
     <Compile Include="ProfileCredentialsFactory.pas" />
     <Compile Include="LamdaCredentialsFactory.pas" />
     <Compile Include="Interfaces\IAWSCredentialsFactory.pas" />
-    <Compile Include="Interfaces\IPostgresDatabaseConfig.pas" />
     <Compile Include="AWSSecrets.pas" />
     <Compile Include="AWSCachedSecrets.pas" />
     <Compile Include="Interfaces\IAWSSecrets.pas" />
+    <Compile Include="Interfaces\IPostgresConfigBuilder.pas" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.Echoes.targets" />
 </Project>

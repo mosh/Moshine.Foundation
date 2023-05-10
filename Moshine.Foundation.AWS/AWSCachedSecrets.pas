@@ -5,7 +5,9 @@ uses
   Amazon.SecretsManager,
   Amazon.SecretsManager.Extensions.Caching,
   Microsoft.Extensions.Logging,
-  Moshine.Foundation.AWS.Interfaces, Newtonsoft.Json, System.Dynamic;
+  Moshine.Foundation.AWS.Interfaces,
+  Newtonsoft.Json,
+  System.Dynamic, System.Threading;
 
 type
   AWSCachedSecrets = public class(IAWSSecrets)
@@ -13,34 +15,37 @@ type
     property Logger:ILogger<AWSCachedSecrets>;
     property factory:IAWSCredentialsFactory;
     property cache:&Lazy<SecretsManagerCache>;
-    property region:RegionEndpoint;
+    property SecretRegion:RegionEndpoint;
 
   public
     constructor(factoryImpl:IAWSCredentialsFactory; region:RegionEndpoint; loggerImpl:ILogger<AWSCachedSecrets>);
     begin
       Logger := loggerImpl;
       factory := factoryImpl;
-      self.region := region;
+      SecretRegion := region;
+
+      Logger.LogInformation('AWSCachedSecrets Constructor');
 
       cache := new &Lazy<SecretsManagerCache>(method
           begin
-            Logger.LogTrace('Creating SecretsManagerCache');
-            var client := new AmazonSecretsManagerClient(factory.Get, region);
+            Logger.LogInformation('Creating SecretsManagerCache');
+            var client := new AmazonSecretsManagerClient(factory.Get, SecretRegion);
             var configuration := new SecretCacheConfiguration();
-            Logger.LogTrace('Created SecretsManagerCache');
+            configuration.Client := client;
+            Logger.LogInformation('Created SecretsManagerCache');
 
             exit new SecretsManagerCache(client, configuration);
 
           end,System.Threading.LazyThreadSafetyMode.ExecutionAndPublication);
     end;
 
-    method GetSecretAsync(name:String):Task<IDictionary<String,Object>>;
+    method GetSecretAsync(name:String; cancellationToken:CancellationToken := default):Task<IDictionary<String,Object>>;
     begin
-      Logger.LogTrace('About to retrieve secret');
+      Logger.LogInformation('About to retrieve secret');
 
-      var secret := await cache.Value.GetSecretString(name).ConfigureAwait(false);
+      var secret := await cache.Value.GetSecretStringAsync(name, cancellationToken).ConfigureAwait(false);
 
-      Logger.LogTrace('Retrieved secret');
+      Logger.LogInformation('Retrieved secret');
 
       exit IDictionary<String,Object>(JsonConvert.DeserializeObject<ExpandoObject>(secret));
 

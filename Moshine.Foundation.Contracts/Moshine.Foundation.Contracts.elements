@@ -36,7 +36,6 @@
     <Compile Include="IConnectionBuilder.pas" />
     <Compile Include="..\Moshine.Foundation\ProductVersion.pas" />
     <Compile Include="Models\DatabaseConfig.pas" />
-    <Compile Include="Interfaces\IDatabaseConfig.pas" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.Echoes.targets" />
 </Project>

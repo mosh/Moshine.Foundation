@@ -1,11 +1,8 @@
 ﻿namespace Moshine.Foundation.Contracts.Models;
 
-uses
-  Moshine.Foundation.Contracts.Interfaces;
-
 type
 
-  DatabaseConfig = public class(IDatabaseConfig)
+  DatabaseConfig = public class
   public
     property Host:String;
     property Port:Integer;
