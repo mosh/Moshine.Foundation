@@ -7,6 +7,8 @@ Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation.AWS", "M
 EndProject
 Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation.Contracts", "Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements", "{D158CF2E-629D-4FAE-B978-8D93E435C07A}"
 EndProject
+Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation.Security", "Moshine.Foundation.Security\Moshine.Foundation.Security.elements", "{0CDD5A48-1B01-4EFA-B421-2F9952AABC6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AnyCPU = Debug|AnyCPU
@@ -25,6 +27,10 @@ Global
 		{D158CF2E-629D-4FAE-B978-8D93E435C07A}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
 		{D158CF2E-629D-4FAE-B978-8D93E435C07A}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
 		{D158CF2E-629D-4FAE-B978-8D93E435C07A}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{0CDD5A48-1B01-4EFA-B421-2F9952AABC6B}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{0CDD5A48-1B01-4EFA-B421-2F9952AABC6B}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{0CDD5A48-1B01-4EFA-B421-2F9952AABC6B}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{0CDD5A48-1B01-4EFA-B421-2F9952AABC6B}.Release|AnyCPU.Build.0 = Release|AnyCPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

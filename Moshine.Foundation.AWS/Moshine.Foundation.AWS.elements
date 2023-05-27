@@ -71,6 +71,9 @@
     <Compile Include="AWSCachedSecrets.pas" />
     <Compile Include="Interfaces\IAWSSecrets.pas" />
     <Compile Include="Interfaces\IPostgresConfigBuilder.pas" />
+    <Compile Include="..\Moshine.Foundation\ProductVersion.pas" />
+    <Compile Include="ServiceProviderHelpers.pas" />
+    <Compile Include="ServiceStartupAttribute.pas" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.Echoes.targets" />
 </Project>

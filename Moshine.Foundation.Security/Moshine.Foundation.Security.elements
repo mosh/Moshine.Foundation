@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProductVersion>3.5</ProductVersion>
+    <RootNamespace>Moshine.Foundation.Security</RootNamespace>
+    <ProjectGuid>{0CDD5A48-1B01-4EFA-B421-2F9952AABC6B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Moshine.Foundation.Security</AssemblyName>
+    <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
+    <TargetFramework>.NET6.0</TargetFramework>
+    <Mode>Echoes</Mode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <Optimize>False</Optimize>
+    <OutputPath>.\Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;</DefineConstants>
+    <GeneratePDB>True</GeneratePDB>
+    <GenerateMDB>True</GenerateMDB>
+    <EnableAsserts>True</EnableAsserts>
+    <CpuType>anycpu</CpuType>
+    <EnableUnmanagedDebugging>False</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>.\Bin\Release</OutputPath>
+    <CpuType>anycpu</CpuType>
+    <EnableUnmanagedDebugging>False</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Echoes">
+      <Private>True</Private>
+    </Reference>
+    <NuGetReference Include="Microsoft.Extensions.Logging:[6.0.0]" />
+    <NuGetReference Include="Newtonsoft.Json:[13.0.2]">
+      <Private>True</Private>
+    </NuGetReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.pas" />
+    <Compile Include="..\Moshine.Foundation\ProductVersion.pas" />
+    <Compile Include="Interfaces\IPrincipalProvider.pas" />
+    <Compile Include="GoogleAuthPrincipalProvider.pas" />
+    <Compile Include="Models\MyPrincipal.pas" />
+    <Compile Include="Models\MyClaimTypes.pas" />
+    <Compile Include="Proxies\GoogleOAuthProxy.pas" />
+    <Compile Include="Models\UserInformation.pas" />
+    <Compile Include="Interfaces\IUserInformation.pas" />
+    <Compile Include="Models\User.pas" />
+    <Compile Include="Models\AccessTokenInformation.pas" />
+    <Compile Include="Interfaces\IUserRepository.pas" />
+    <Compile Include="Models\AccessTokenError.pas" />
+    <Compile Include="Interfaces\IClaimsRepository.pas" />
+    <Compile Include="ViewModels\ClaimsViewModel.pas" />
+    <Compile Include="PrincipalProvider.pas" />
+    <Compile Include="SimplePrincipalProvider.pas" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.Echoes.targets" />
+</Project>
