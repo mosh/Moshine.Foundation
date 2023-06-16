@@ -1,17 +1,19 @@
 ﻿namespace Moshine.Foundation.AWS;
 
 uses
-  Microsoft.Extensions.DependencyInjection;
+  Microsoft.Extensions.DependencyInjection, System.Reflection;
 
 
 type
+
   ServiceProviderHelpers = public static class
   public
-    method Build:ServiceProvider;
+
+    method Build(callingAssembly:&Assembly):ServiceProvider;
     begin
       var collection := new ServiceCollection;
 
-      var callingAssembly := typeOf(ServiceProviderHelpers).Assembly.GetCallingAssembly;
+      Console.WriteLine($'Scanning in {callingAssembly.FullName} for ServiceStartupAttribute');
 
       var typeInCallingAssembly := callingAssembly.GetTypes.FirstOrDefault(t ->
       begin
@@ -42,6 +44,13 @@ type
 
       exit collection.BuildServiceProvider;
 
+    end;
+
+    method Build:ServiceProvider;
+    begin
+      var callingAssembly := typeOf(ServiceProviderHelpers).Assembly.GetCallingAssembly;
+
+      exit Build(callingAssembly);
     end;
   end;
 
