@@ -1,53 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
-    <ProductVersion>3.5</ProductVersion>
+    <ProjectGuid>{881953F1-BD45-4FFF-80B0-A6A43D386C90}</ProjectGuid>
+    <OutputType>StaticLibrary</OutputType>
     <RootNamespace>Moshine.Foundation.Contracts</RootNamespace>
-    <ProjectGuid>{D158CF2E-629D-4FAE-B978-8D93E435C07A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AssemblyName>Moshine.Foundation.Contracts</AssemblyName>
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
   </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Target)' == 'Echoes.Core' ">
-    <Mode>Echoes</Mode>
-    <TargetFramework>.NET6.0</TargetFramework>
-    <ConditionalDefines>NETCORE</ConditionalDefines>
-    <OutputType>Library</OutputType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Target)' == 'Echoes.Standard' ">
-    <Mode>Echoes</Mode>
-    <TargetFramework>.NETStandard2.0</TargetFramework>
-    <ConditionalDefines>NETSTANDARD</ConditionalDefines>
-    <OutputType>Library</OutputType>
-  </PropertyGroup>
-
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <Optimize>False</Optimize>
     <OutputPath>.\Bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;TRACE;</DefineConstants>
-    <GeneratePDB>True</GeneratePDB>
-    <GenerateMDB>True</GenerateMDB>
     <EnableAsserts>True</EnableAsserts>
-    <CpuType>anycpu</CpuType>
-    <EnableUnmanagedDebugging>False</EnableUnmanagedDebugging>
+    <Optimize>False</Optimize>
+    <GenerateDebugInfo>True</GenerateDebugInfo>
+    <ConditionalDefines>DEBUG;TRACE;</ConditionalDefines>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <OutputPath>.\Bin\Release</OutputPath>
-    <CpuType>anycpu</CpuType>
-    <EnableUnmanagedDebugging>False</EnableUnmanagedDebugging>
-    <CreateNuGetPackage>True</CreateNuGetPackage>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Echoes.Core' ">
+    <Mode>Echoes</Mode>
+    <TargetFramework>.NETCore</TargetFramework>
+    <ConditionalDefines>NETCORE</ConditionalDefines>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Island.Linux' ">
+    <Mode>Island</Mode>
+    <SubMode>Linux</SubMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Island.Darwin.macOS' ">
+    <Mode>Island</Mode>
+    <SubMode>Darwin</SubMode>
+    <SDK>macOS</SDK>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Island.Darwin.iOS' ">
+    <Mode>Island</Mode>
+    <SubMode>Darwin</SubMode>
+    <SDK>iOS</SDK>
+    <SupportMacCatalyst>True</SupportMacCatalyst>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Island.Darwin.watchOS' ">
+    <Mode>Island</Mode>
+    <SubMode>Darwin</SubMode>
+    <SDK>watchOS</SDK>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Toffee.iOS' ">
+    <Mode>Toffee</Mode>
+    <SDK>iOS</SDK>
+    <SupportMacCatalyst>True</SupportMacCatalyst>
+    <DefaultUses>Foundation;RemObjects.Elements.Linq</DefaultUses>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Toffee.macOS' ">
+    <Mode>Toffee</Mode>
+    <SDK>macOS</SDK>
+    <DefaultUses>Foundation;RemObjects.Elements.Linq</DefaultUses>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Target)' == 'Toffee.watchOS' ">
+    <Mode>Toffee</Mode>
+    <SDK>watchOS</SDK>
+    <DefaultUses>Foundation;RemObjects.Elements.Linq</DefaultUses>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Echoes">
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="#" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.pas" />
     <Compile Include="IConnectionBuilder.pas" />
-    <Compile Include="..\Moshine.Foundation\ProductVersion.pas" />
+    <Compile Include="Properties\AssemblyInfo.pas" />
     <Compile Include="Models\DatabaseConfig.pas" />
+    <Compile Include="..\Moshine.Foundation\ProductVersion.pas" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.Echoes.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.targets" />
 </Project>

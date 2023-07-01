@@ -27,12 +27,6 @@
     <CreateNuGetPackage>True</CreateNuGetPackage>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Moshine.Foundation\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements">
-      <HintPath>..\..\Moshine.Foundation\Moshine.Foundation.Contracts\Bin\Release\Moshine.Foundation.Contracts.dll</HintPath>
-      <Project>{D158CF2E-629D-4FAE-B978-8D93E435C07A}</Project>
-      <ProjectFile>..\..\Moshine.Foundation\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements</ProjectFile>
-      <Private>True</Private>
-    </ProjectReference>
     <NuGetReference Include="Npgsql:[7.0.2]">
       <Private>True</Private>
     </NuGetReference>
@@ -55,6 +49,12 @@
       <HintPath>..\..\aws-secretsmanager-caching-net\src\Amazon.SecretsManager.Extensions.Caching\bin\Debug\netstandard2.0\Amazon.SecretsManager.Extensions.Caching.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <ProjectReference Include="..\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements">
+      <HintPath>..\Moshine.Foundation.Contracts\Bin\Debug\iOS\arm64\Moshine.Foundation.Contracts.fx</HintPath>
+      <Project>{881953F1-BD45-4FFF-80B0-A6A43D386C90}</Project>
+      <ProjectFile>..\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements</ProjectFile>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.pas" />

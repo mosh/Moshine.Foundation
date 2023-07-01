@@ -5,7 +5,7 @@ Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation", "Moshi
 EndProject
 Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation.AWS", "Moshine.Foundation.AWS\Moshine.Foundation.AWS.elements", "{EF85F273-C62A-4B33-8A7F-11F69045A9EB}"
 EndProject
-Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation.Contracts", "Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements", "{D158CF2E-629D-4FAE-B978-8D93E435C07A}"
+Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation.Contracts", "Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements", "{881953F1-BD45-4FFF-80B0-A6A43D386C90}"
 EndProject
 Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation.Security", "Moshine.Foundation.Security\Moshine.Foundation.Security.elements", "{0CDD5A48-1B01-4EFA-B421-2F9952AABC6B}"
 EndProject
@@ -23,10 +23,10 @@ Global
 		{EF85F273-C62A-4B33-8A7F-11F69045A9EB}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
 		{EF85F273-C62A-4B33-8A7F-11F69045A9EB}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
 		{EF85F273-C62A-4B33-8A7F-11F69045A9EB}.Release|AnyCPU.Build.0 = Release|AnyCPU
-		{D158CF2E-629D-4FAE-B978-8D93E435C07A}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
-		{D158CF2E-629D-4FAE-B978-8D93E435C07A}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
-		{D158CF2E-629D-4FAE-B978-8D93E435C07A}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
-		{D158CF2E-629D-4FAE-B978-8D93E435C07A}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{881953F1-BD45-4FFF-80B0-A6A43D386C90}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{881953F1-BD45-4FFF-80B0-A6A43D386C90}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{881953F1-BD45-4FFF-80B0-A6A43D386C90}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{881953F1-BD45-4FFF-80B0-A6A43D386C90}.Release|AnyCPU.Build.0 = Release|AnyCPU
 		{0CDD5A48-1B01-4EFA-B421-2F9952AABC6B}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
 		{0CDD5A48-1B01-4EFA-B421-2F9952AABC6B}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
 		{0CDD5A48-1B01-4EFA-B421-2F9952AABC6B}.Release|AnyCPU.ActiveCfg = Release|AnyCPU

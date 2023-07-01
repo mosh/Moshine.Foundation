@@ -1,6 +1,7 @@
 ﻿namespace Moshine.Foundation.Contracts;
 
-interface
+
+{$IFDEF ECHOES}
 
 uses
   System.Reflection,
@@ -40,6 +41,7 @@ uses
 [assembly: AssemblyKeyFile('')]
 [assembly: AssemblyKeyName('')]
 
-implementation
+{$ENDIF}
+
 
 end.

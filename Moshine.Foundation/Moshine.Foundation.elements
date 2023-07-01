@@ -24,12 +24,6 @@
     <ConditionalDefines>NETCORE</ConditionalDefines>
     <OutputType>Library</OutputType>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Target)' == 'Echoes.Standard' ">
-    <Mode>Echoes</Mode>
-    <TargetFramework>.NETStandard2.0</TargetFramework>
-    <ConditionalDefines>NETSTANDARD</ConditionalDefines>
-    <OutputType>Library</OutputType>
-  </PropertyGroup>
   <PropertyGroup Condition=" '$(Target)' == 'Island.Darwin.macOS' ">
     <Mode>Island</Mode>
     <SubMode>Darwin</SubMode>
@@ -98,17 +92,14 @@
     <Reference Include="Elements">
       <Private>True</Private>
     </Reference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(Target)' == 'Echoes.Core'">
-    <NuGetReference Include="Newtonsoft.Json:[12.0.1]" />
-    <NuGetReference Include="NodaTime:[3.1.6]" />
-    <ProjectReference Include="Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements">
-      <Project>{D158CF2E-629D-4FAE-B978-8D93E435C07A}</Project>
-      <ProjectFile>Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements</ProjectFile>
+    <ProjectReference Include="..\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements">
+      <HintPath>..\Moshine.Foundation.Contracts\Bin\Debug\iOS\arm64\Moshine.Foundation.Contracts.fx</HintPath>
+      <Project>{881953F1-BD45-4FFF-80B0-A6A43D386C90}</Project>
+      <ProjectFile>..\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements</ProjectFile>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup Condition="'$(Target)' == 'Echoes.Standard'">
+  <ItemGroup Condition="'$(Target)' == 'Echoes.Core'">
     <NuGetReference Include="Newtonsoft.Json:[12.0.1]" />
     <NuGetReference Include="NodaTime:[3.1.6]" />
   </ItemGroup>
