@@ -149,7 +149,7 @@ type
 
       if(SCNetworkReachabilitySetCallback(reachabilityRef, callback, @context)) then
       begin
-        if(SCNetworkReachabilityScheduleWithRunLoop(reachabilityRef, CFRunLoopGetMain(), kCFRunLoopDefaultMode)) then // DFH CFRunLoopGetCurrent()
+        if(SCNetworkReachabilityScheduleWithRunLoop(reachabilityRef, CFRunLoopGetMain, kCFRunLoopDefaultMode)) then // DFH CFRunLoopGetCurrent()
         begin
           retVal := true;
         end;
@@ -161,7 +161,7 @@ type
     begin
       if(assigned(reachabilityRef))then
       begin
-        SCNetworkReachabilityUnscheduleFromRunLoop(reachabilityRef, CFRunLoopGetMain(), kCFRunLoopDefaultMode);  // CFRunLoopGetCurrent()
+        SCNetworkReachabilityUnscheduleFromRunLoop(reachabilityRef, CFRunLoopGetMain, kCFRunLoopDefaultMode);  // CFRunLoopGetCurrent()
       end;
 
     end;

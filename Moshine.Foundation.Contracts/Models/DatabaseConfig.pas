@@ -4,9 +4,9 @@ type
 
   DatabaseConfig = public class
   public
-    property Host:String;
-    property Port:Integer;
-    property Username:String;
+    property Host:String; required;
+    property Port:Integer; required;
+    property Username:String; required;
   end;
 
 end.

@@ -116,6 +116,7 @@
     <Reference Include="SystemConfiguration" />
   </ItemGroup>
   <ItemGroup Condition="'$(Target)' == 'Island.Darwin.iOS'">
+    <Reference Include="CoreFoundation" />
     <Reference Include="SystemConfiguration" />
   </ItemGroup>
   <ItemGroup>
