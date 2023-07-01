@@ -40,12 +40,6 @@
     <Architecture>all</Architecture>
     <DefaultObjectModel>Cocoa</DefaultObjectModel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Target)' == 'Island.Darwin.tvOS' ">
-    <Mode>Island</Mode>
-    <SubMode>Darwin</SubMode>
-    <SDK>tvOS</SDK>
-    <DefaultObjectModel>Cocoa</DefaultObjectModel>
-  </PropertyGroup>
   <PropertyGroup Condition=" '$(Target)' == 'Island.Darwin.watchOS' ">
     <Mode>Island</Mode>
     <SubMode>Darwin</SubMode>
@@ -73,19 +67,14 @@
     <SDK>macOS</SDK>
     <DefaultUses>Foundation;RemObjects.Elements.Linq</DefaultUses>
     <GenerateBitcode>True</GenerateBitcode>
-    <Architecture>all</Architecture>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Target)' == 'Toffee.tvOS' ">
-    <Mode>Toffee</Mode>
-    <SDK>tvOS</SDK>
-    <DefaultUses>Foundation;RemObjects.Elements.Linq</DefaultUses>
+    <Architecture>arm64</Architecture>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Target)' == 'Toffee.watchOS' ">
     <Mode>Toffee</Mode>
     <SDK>watchOS</SDK>
     <DefaultUses>Foundation;RemObjects.Elements.Linq</DefaultUses>
     <GenerateBitcode>True</GenerateBitcode>
-    <Architecture>all</Architecture>
+    <Architecture>arm64_32</Architecture>
     <SimulatorArchitecture>all</SimulatorArchitecture>
   </PropertyGroup>
   <ItemGroup>
