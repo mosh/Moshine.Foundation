@@ -55,6 +55,15 @@
       <ProjectFile>..\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements</ProjectFile>
       <Private>True</Private>
     </ProjectReference>
+    <NuGetReference Include="NodaTime:[3.1.6]">
+      <Private>True</Private>
+    </NuGetReference>
+    <NuGetReference Include="Dapper:[2.0.123]">
+      <Private>True</Private>
+    </NuGetReference>
+    <NuGetReference Include="Npgsql.NodaTime:[7.0.2]">
+      <Private>True</Private>
+    </NuGetReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.pas" />
@@ -74,6 +83,7 @@
     <Compile Include="..\Moshine.Foundation\ProductVersion.pas" />
     <Compile Include="ServiceProviderHelpers.pas" />
     <Compile Include="ServiceStartupAttribute.pas" />
+    <Compile Include="LocalDateTimeHandler.pas" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.Echoes.targets" />
 </Project>

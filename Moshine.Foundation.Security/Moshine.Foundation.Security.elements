@@ -24,6 +24,7 @@
     <OutputPath>.\Bin\Release</OutputPath>
     <CpuType>anycpu</CpuType>
     <EnableUnmanagedDebugging>False</EnableUnmanagedDebugging>
+    <CreateNuGetPackage>True</CreateNuGetPackage>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Echoes">
