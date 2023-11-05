@@ -3,6 +3,7 @@
 {$IF ECHOES}
 
 uses
+  NpgSql,
   System.Data.Common, System.Threading;
 
 type

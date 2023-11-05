@@ -1,13 +1,17 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # RemObjects Fire
-Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation", "Moshine.Foundation\Moshine.Foundation.elements", "{19E42704-1AC8-4D61-B2C5-FF63E951602F}"
+Project("{656346d9-4656-40da-a068-22d5425d4639}") = "Moshine.Foundation", "Moshine.Foundation\Moshine.Foundation.elements", "{19e42704-1ac8-4d61-b2c5-ff63e951602f}"
 EndProject
-Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation.AWS", "Moshine.Foundation.AWS\Moshine.Foundation.AWS.elements", "{EF85F273-C62A-4B33-8A7F-11F69045A9EB}"
+Project("{656346d9-4656-40da-a068-22d5425d4639}") = "Moshine.Foundation.AWS", "Moshine.Foundation.AWS\Moshine.Foundation.AWS.elements", "{ef85f273-c62a-4b33-8a7f-11f69045a9eb}"
 EndProject
-Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation.Contracts", "Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements", "{881953F1-BD45-4FFF-80B0-A6A43D386C90}"
+Project("{656346d9-4656-40da-a068-22d5425d4639}") = "Moshine.Foundation.Contracts", "Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements", "{881953f1-bd45-4fff-80b0-a6a43d386c90}"
 EndProject
-Project("{656346D9-4656-40DA-A068-22D5425D4639}") = "Moshine.Foundation.Security", "Moshine.Foundation.Security\Moshine.Foundation.Security.elements", "{0CDD5A48-1B01-4EFA-B421-2F9952AABC6B}"
+Project("{656346d9-4656-40da-a068-22d5425d4639}") = "Moshine.Foundation.Data.Postgres", "Moshine.Foundation.Data.Postgres\Moshine.Foundation.Data.Postgres.elements", "{e87e2ed2-ad31-4c36-891e-5caa6c4c1b3b}"
+EndProject
+Project("{656346d9-4656-40da-a068-22d5425d4639}") = "Moshine.Foundation.Data.SqlServer", "Moshine.Foundation.Data.SqlServer\Moshine.Foundation.Data.SqlServer.elements", "{532eecf9-ec0d-46b4-bfe9-499836327e70}"
+EndProject
+Project("{656346d9-4656-40da-a068-22d5425d4639}") = "Moshine.Foundation.Security", "Moshine.Foundation.Security\Moshine.Foundation.Security.elements", "{0cdd5a48-1b01-4efa-b421-2f9952aabc6b}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,22 +19,30 @@ Global
 		Release|AnyCPU = Release|AnyCPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{19E42704-1AC8-4D61-B2C5-FF63E951602F}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
-		{19E42704-1AC8-4D61-B2C5-FF63E951602F}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
-		{19E42704-1AC8-4D61-B2C5-FF63E951602F}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
-		{19E42704-1AC8-4D61-B2C5-FF63E951602F}.Release|AnyCPU.Build.0 = Release|AnyCPU
-		{EF85F273-C62A-4B33-8A7F-11F69045A9EB}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
-		{EF85F273-C62A-4B33-8A7F-11F69045A9EB}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
-		{EF85F273-C62A-4B33-8A7F-11F69045A9EB}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
-		{EF85F273-C62A-4B33-8A7F-11F69045A9EB}.Release|AnyCPU.Build.0 = Release|AnyCPU
-		{881953F1-BD45-4FFF-80B0-A6A43D386C90}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
-		{881953F1-BD45-4FFF-80B0-A6A43D386C90}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
-		{881953F1-BD45-4FFF-80B0-A6A43D386C90}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
-		{881953F1-BD45-4FFF-80B0-A6A43D386C90}.Release|AnyCPU.Build.0 = Release|AnyCPU
-		{0CDD5A48-1B01-4EFA-B421-2F9952AABC6B}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
-		{0CDD5A48-1B01-4EFA-B421-2F9952AABC6B}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
-		{0CDD5A48-1B01-4EFA-B421-2F9952AABC6B}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
-		{0CDD5A48-1B01-4EFA-B421-2F9952AABC6B}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{19e42704-1ac8-4d61-b2c5-ff63e951602f}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{19e42704-1ac8-4d61-b2c5-ff63e951602f}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{19e42704-1ac8-4d61-b2c5-ff63e951602f}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{19e42704-1ac8-4d61-b2c5-ff63e951602f}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{ef85f273-c62a-4b33-8a7f-11f69045a9eb}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{ef85f273-c62a-4b33-8a7f-11f69045a9eb}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{ef85f273-c62a-4b33-8a7f-11f69045a9eb}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{ef85f273-c62a-4b33-8a7f-11f69045a9eb}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{881953f1-bd45-4fff-80b0-a6a43d386c90}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{881953f1-bd45-4fff-80b0-a6a43d386c90}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{881953f1-bd45-4fff-80b0-a6a43d386c90}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{881953f1-bd45-4fff-80b0-a6a43d386c90}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{e87e2ed2-ad31-4c36-891e-5caa6c4c1b3b}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{e87e2ed2-ad31-4c36-891e-5caa6c4c1b3b}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{e87e2ed2-ad31-4c36-891e-5caa6c4c1b3b}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{e87e2ed2-ad31-4c36-891e-5caa6c4c1b3b}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{532eecf9-ec0d-46b4-bfe9-499836327e70}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{532eecf9-ec0d-46b4-bfe9-499836327e70}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{532eecf9-ec0d-46b4-bfe9-499836327e70}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{532eecf9-ec0d-46b4-bfe9-499836327e70}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{0cdd5a48-1b01-4efa-b421-2f9952aabc6b}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{0cdd5a48-1b01-4efa-b421-2f9952aabc6b}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{0cdd5a48-1b01-4efa-b421-2f9952aabc6b}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{0cdd5a48-1b01-4efa-b421-2f9952aabc6b}.Release|AnyCPU.Build.0 = Release|AnyCPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

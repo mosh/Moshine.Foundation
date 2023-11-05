@@ -20,10 +20,10 @@ type
 
   public
 
-    constructor(factory:IAWSCredentialsFactory; region:RegionEndpoint);
+    constructor(factoryImpl:IAWSCredentialsFactory; regionImpl:RegionEndpoint);
     begin
-      self.region := region;
-      self.factory := factory;
+      self.region := regionImpl;
+      self.factory := factoryImpl;
     end;
 
     method GetSecretAsync(secretName:String; cancellationToken:CancellationToken := default):Task<IDictionary<String,Object>>;
