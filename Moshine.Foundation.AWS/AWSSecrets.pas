@@ -5,9 +5,11 @@ uses
   Amazon.SecretsManager,
   Amazon.SecretsManager.Model,
   Moshine.Foundation.AWS.Interfaces,
-  Newtonsoft.Json,
+  System.Text.Json,
   System.Dynamic,
+  System.IO,
   System.Net,
+  System.Text,
   System.Threading;
 
 type
@@ -40,10 +42,15 @@ type
         raise new ApplicationException($'Failed to get secret StatusCode {response.HttpStatusCode}');
       end;
 
-      var secret := response.SecretString;
+      var secretString := response.SecretString;
 
-      exit IDictionary<String,Object>(JsonConvert.DeserializeObject<ExpandoObject>(secret));
+      using jsonStream := new MemoryStream(Encoding.UTF8.GetBytes(secretString)) do
+      begin
+        var secret := await JsonSerializer.DeserializeAsync<ExpandoObject>(jsonStream);
 
+        exit IDictionary<String,Object>(secret);
+
+      end;
 
     end;
 

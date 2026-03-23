@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <AssemblyName>Moshine.Foundation.AWS</AssemblyName>
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
-    <TargetFramework>.NET6.0</TargetFramework>
+    <TargetFramework>.NET8.0</TargetFramework>
     <Mode>Echoes</Mode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -27,22 +27,19 @@
     <CreateNuGetPackage>True</CreateNuGetPackage>
   </PropertyGroup>
   <ItemGroup>
-    <NuGetReference Include="Npgsql:[7.0.2]">
+    <NuGetReference Include="Npgsql:[10.0.1]">
       <Private>True</Private>
     </NuGetReference>
-    <NuGetReference Include="AWSSDK.Core:[3.7.106.6]">
+    <NuGetReference Include="AWSSDK.Core:[4.0.3.19]">
       <Private>True</Private>
     </NuGetReference>
-    <NuGetReference Include="AWSSDK.RDS:[3.7.115]">
+    <NuGetReference Include="AWSSDK.RDS:[4.0.18.4]">
       <Private>True</Private>
     </NuGetReference>
-    <NuGetReference Include="AWSSDK.SecretsManager:[3.7.102.29]">
+    <NuGetReference Include="AWSSDK.SecretsManager:[4.0.4.10]">
       <Private>True</Private>
     </NuGetReference>
-    <NuGetReference Include="Newtonsoft.Json:[13.0.3]">
-      <Private>True</Private>
-    </NuGetReference>
-    <NuGetReference Include="Microsoft.Extensions.Logging:[6.0.0]">
+    <NuGetReference Include="Microsoft.Extensions.Logging:[10.0.1]">
       <Private>True</Private>
     </NuGetReference>
     <Reference Include="Amazon.SecretsManager.Extensions.Caching">
@@ -58,10 +55,10 @@
     <NuGetReference Include="NodaTime:[3.1.6]">
       <Private>True</Private>
     </NuGetReference>
-    <NuGetReference Include="Dapper:[2.0.123]">
+    <NuGetReference Include="Dapper:[2.1.44]">
       <Private>True</Private>
     </NuGetReference>
-    <NuGetReference Include="Npgsql.NodaTime:[7.0.2]">
+    <NuGetReference Include="Npgsql.NodaTime:[10.0.1]">
       <Private>True</Private>
     </NuGetReference>
   </ItemGroup>

@@ -6,8 +6,11 @@ uses
   Amazon.SecretsManager.Extensions.Caching,
   Microsoft.Extensions.Logging,
   Moshine.Foundation.AWS.Interfaces,
-  Newtonsoft.Json,
-  System.Dynamic, System.Threading;
+  System.Dynamic,
+  System.IO,
+  System.Text,
+  System.Text.Json,
+  System.Threading;
 
 type
   AWSCachedSecrets = public class(IAWSSecrets)
@@ -43,11 +46,18 @@ type
     begin
       Logger.LogInformation('About to retrieve secret');
 
-      var secret := await cache.Value.GetSecretStringAsync(name, cancellationToken).ConfigureAwait(false);
+      var secretString := await cache.Value.GetSecretStringAsync(name, cancellationToken).ConfigureAwait(false);
 
       Logger.LogInformation('Retrieved secret');
 
-      exit IDictionary<String,Object>(JsonConvert.DeserializeObject<ExpandoObject>(secret));
+      using jsonStream := new MemoryStream(Encoding.UTF8.GetBytes(secretString)) do
+      begin
+        var secret := await JsonSerializer.DeserializeAsync<ExpandoObject>(jsonStream);
+
+        exit IDictionary<String,Object>(secret);
+
+      end;
+
 
     end;
   end;

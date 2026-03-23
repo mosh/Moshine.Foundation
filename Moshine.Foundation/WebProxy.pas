@@ -4,8 +4,8 @@ uses
   {$IF TOFFEE OR DARWIN}
   Foundation,
   {$ELSEIF ECHOES}
-  Newtonsoft.Json,
   System.Net.Http,
+  System.Text.Json,
   {$ENDIF}
   Moshine.Foundation,
   RemObjects.Elements.RTL;
@@ -32,7 +32,7 @@ type
       end
       else if (defined('ECHOES')) then
       begin
-      exit JsonConvert.DeserializeObject<T>(WebRequestAsString(webMethod, url, nil,addAuthentication));
+      exit JsonSerializer.Deserialize<T>(WebRequestAsString(webMethod, url, nil,addAuthentication));
       end;
     end;
 
@@ -249,7 +249,7 @@ type
 
       if(assigned(jsonBody))then
       begin
-        var someJson := JsonConvert.SerializeObject(jsonBody);
+        var someJson := JsonSerializer.Serialize(jsonBody);
         var content := new StringContent(someJson, Encoding.UTF8, 'application/json');
         requestMessage.Content := content;
       end;
@@ -260,7 +260,7 @@ type
 
     method WebRequestAsObject(webMethod:String; url:String; jsonBody:Object;addAuthentication:Boolean := true):Object;
     begin
-      exit JsonConvert.DeserializeObject<Dictionary<String,Object>>(WebRequestAsString(webMethod, url, jsonBody, addAuthentication));
+      exit JsonSerializer.Deserialize<Dictionary<String,Object>>(WebRequestAsString(webMethod, url, jsonBody, addAuthentication));
     end;
 
     {$ELSE}

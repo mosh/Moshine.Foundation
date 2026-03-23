@@ -3,11 +3,11 @@
 uses
   Moshine.Foundation.Security.Models,
   Microsoft.Extensions.Logging,
-  Newtonsoft.Json,
   System.Collections.Generic,
   System.Linq,
   System.Net.Http,
   System.Text,
+  System.Text.Json,
   System.Threading.Tasks;
 
 type
@@ -29,7 +29,7 @@ type
       var response := await client.GetAsync(url,HttpCompletionOption.ResponseContentRead);
       var stringResult := await response.Content.ReadAsStringAsync;
 
-      var responseInformation := JsonConvert.DeserializeObject<AccessTokenInformation>(stringResult);
+      var responseInformation := JsonSerializer.Deserialize<AccessTokenInformation>(stringResult);
 
 
       if(not assigned(responseInformation.error))then

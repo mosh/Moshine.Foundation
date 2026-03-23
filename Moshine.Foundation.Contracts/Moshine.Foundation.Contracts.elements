@@ -19,7 +19,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Target)' == 'Echoes.Core' ">
     <Mode>Echoes</Mode>
-    <TargetFramework>.NET6.0</TargetFramework>
+    <TargetFramework>.NET8.0</TargetFramework>
     <ConditionalDefines>NETCORE</ConditionalDefines>
     <OutputType>Library</OutputType>
   </PropertyGroup>
@@ -63,7 +63,7 @@
     <Reference Include="#" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Target)' == 'Echoes.Core' ">
-    <NuGetReference Include="Npgsql:[7.0.2]">
+    <NuGetReference Include="Npgsql:[10.0.1]">
       <Private>True</Private>
     </NuGetReference>
   </ItemGroup>

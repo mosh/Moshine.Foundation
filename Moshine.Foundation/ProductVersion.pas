@@ -7,9 +7,9 @@ uses
   System.Runtime.InteropServices,
   System.Reflection;
 
-[assembly: AssemblyVersion('4.1.0')]
-[assembly: AssemblyFileVersion('4.1.0')]
-[assembly: AssemblyCopyright('Copyright © 2023')]
+[assembly: AssemblyVersion('5.0.7')]
+[assembly: AssemblyFileVersion('5.0.7')]
+[assembly: AssemblyCopyright('Copyright © 2026')]
 [assembly: AssemblyCompany('Moshine')]
 [assembly: AssemblyProduct('Moshine Foundation')]
 

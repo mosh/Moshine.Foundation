@@ -8,7 +8,7 @@
     <AssemblyName>Moshine.Foundation.Data.Postgres</AssemblyName>
     <ApplicationIcon>Properties\App.ico</ApplicationIcon>
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
-    <TargetFramework>.NET6.0</TargetFramework>
+    <TargetFramework>.NET8.0</TargetFramework>
     <Mode>Echoes</Mode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -28,15 +28,12 @@
     <CreateNuGetPackage>True</CreateNuGetPackage>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Echoes">
-      <Private>True</Private>
-    </Reference>
     <ProjectReference Include="..\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements">
       <Project>{881953f1-bd45-4fff-80b0-a6a43d386c90}</Project>
       <ProjectFile>..\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements</ProjectFile>
       <Private>True</Private>
     </ProjectReference>
-    <NuGetReference Include="Npgsql:[7.0.6]">
+    <NuGetReference Include="Npgsql:[10.0.1]">
       <Private>True</Private>
     </NuGetReference>
   </ItemGroup>
