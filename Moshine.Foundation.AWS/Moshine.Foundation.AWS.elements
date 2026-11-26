@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <AssemblyName>Moshine.Foundation.AWS</AssemblyName>
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
-    <TargetFramework>.NET8.0</TargetFramework>
+    <TargetFramework>.NET10.0</TargetFramework>
     <Mode>Echoes</Mode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -27,7 +27,14 @@
     <CreateNuGetPackage>True</CreateNuGetPackage>
   </PropertyGroup>
   <ItemGroup>
-    <NuGetReference Include="Npgsql:[10.0.1]">
+    <ProjectReference Include="..\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements">
+      <Project>{881953f1-bd45-4fff-80b0-a6a43d386c90}</Project>
+      <ProjectFile>..\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements</ProjectFile>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <NuGetReference Include="Npgsql:[10.0.4]">
       <Private>True</Private>
     </NuGetReference>
     <NuGetReference Include="AWSSDK.Core:[4.0.3.19]">
@@ -39,26 +46,19 @@
     <NuGetReference Include="AWSSDK.SecretsManager:[4.0.4.10]">
       <Private>True</Private>
     </NuGetReference>
-    <NuGetReference Include="Microsoft.Extensions.Logging:[10.0.1]">
+    <NuGetReference Include="Microsoft.Extensions.Logging:[11.0.0]">
       <Private>True</Private>
     </NuGetReference>
-    <Reference Include="Amazon.SecretsManager.Extensions.Caching">
-      <HintPath>..\..\aws-secretsmanager-caching-net\src\Amazon.SecretsManager.Extensions.Caching\bin\Debug\netstandard2.0\Amazon.SecretsManager.Extensions.Caching.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <ProjectReference Include="..\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements">
-      <HintPath>..\Moshine.Foundation.Contracts\Bin\Debug\iOS\arm64\Moshine.Foundation.Contracts.fx</HintPath>
-      <Project>{881953F1-BD45-4FFF-80B0-A6A43D386C90}</Project>
-      <ProjectFile>..\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements</ProjectFile>
-      <Private>True</Private>
-    </ProjectReference>
-    <NuGetReference Include="NodaTime:[3.1.6]">
+    <NuGetReference Include="NodaTime:[3.2.2]">
       <Private>True</Private>
     </NuGetReference>
     <NuGetReference Include="Dapper:[2.1.44]">
       <Private>True</Private>
     </NuGetReference>
-    <NuGetReference Include="Npgsql.NodaTime:[10.0.1]">
+    <NuGetReference Include="Npgsql.NodaTime:[10.0.4]">
+      <Private>True</Private>
+    </NuGetReference>
+    <NuGetReference Include="AWSSDK.SecretsManager.Caching:[2.0.0]">
       <Private>True</Private>
     </NuGetReference>
   </ItemGroup>

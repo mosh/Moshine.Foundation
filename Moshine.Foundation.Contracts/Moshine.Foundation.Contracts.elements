@@ -5,6 +5,8 @@
     <OutputType>StaticLibrary</OutputType>
     <RootNamespace>Moshine.Foundation.Contracts</RootNamespace>
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
+    <NETCoreRuntime>Microsoft.NETCore.App</NETCoreRuntime>
+    <Publish>True</Publish>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>.\Bin\Debug</OutputPath>
@@ -19,51 +21,15 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Target)' == 'Echoes.Core' ">
     <Mode>Echoes</Mode>
-    <TargetFramework>.NET8.0</TargetFramework>
+    <TargetFramework>.NET10.0</TargetFramework>
     <ConditionalDefines>NETCORE</ConditionalDefines>
     <OutputType>Library</OutputType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Target)' == 'Island.Linux' ">
-    <Mode>Island</Mode>
-    <SubMode>Linux</SubMode>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Target)' == 'Island.Darwin.macOS' ">
-    <Mode>Island</Mode>
-    <SubMode>Darwin</SubMode>
-    <SDK>macOS</SDK>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Target)' == 'Island.Darwin.iOS' ">
-    <Mode>Island</Mode>
-    <SubMode>Darwin</SubMode>
-    <SDK>iOS</SDK>
-    <SupportMacCatalyst>True</SupportMacCatalyst>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Target)' == 'Island.Darwin.watchOS' ">
-    <Mode>Island</Mode>
-    <SubMode>Darwin</SubMode>
-    <SDK>watchOS</SDK>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Target)' == 'Toffee.iOS' ">
-    <Mode>Toffee</Mode>
-    <SDK>iOS</SDK>
-    <SupportMacCatalyst>True</SupportMacCatalyst>
-    <DefaultUses>Foundation;RemObjects.Elements.Linq</DefaultUses>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Target)' == 'Toffee.macOS' ">
-    <Mode>Toffee</Mode>
-    <SDK>macOS</SDK>
-    <DefaultUses>Foundation;RemObjects.Elements.Linq</DefaultUses>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Target)' == 'Toffee.watchOS' ">
-    <Mode>Toffee</Mode>
-    <SDK>watchOS</SDK>
-    <DefaultUses>Foundation;RemObjects.Elements.Linq</DefaultUses>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="#" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Target)' == 'Echoes.Core' ">
-    <NuGetReference Include="Npgsql:[10.0.1]">
+    <NuGetReference Include="Npgsql:[10.0.4]">
       <Private>True</Private>
     </NuGetReference>
   </ItemGroup>
