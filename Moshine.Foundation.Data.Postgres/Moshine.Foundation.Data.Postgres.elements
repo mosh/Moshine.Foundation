@@ -28,15 +28,19 @@
     <CreateNuGetPackage>True</CreateNuGetPackage>
   </PropertyGroup>
   <ItemGroup>
+    <NuGetReference Include="Npgsql:[10.0.4]">
+      <Private>True</Private>
+    </NuGetReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements">
       <Project>{881953f1-bd45-4fff-80b0-a6a43d386c90}</Project>
       <ProjectFile>..\Moshine.Foundation.Contracts\Moshine.Foundation.Contracts.elements</ProjectFile>
       <Private>True</Private>
     </ProjectReference>
-    <NuGetReference Include="Npgsql:[10.0.4]">
-      <Private>True</Private>
-    </NuGetReference>
   </ItemGroup>
+
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.pas" />
     <Content Include="Properties\App.ico" />
